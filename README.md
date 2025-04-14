@@ -1,8 +1,7 @@
-# RAFFAELLO JavaScript Library 🦦
+# RAFFAELLO JavaScript Library Documentation 🦦
 
 > ⚠️ This project is under proprietary license. 
 <br>Source code is not publicly available. This repository is for documentation, usage examples, bug reports, feature requests, and general discussion.
-
 
 RAFFAELLO is a comprehensive JavaScript library developped for RTS - Radio Television Suisse. It is a seamless solution for remote image creation. It is design to empower users to generate images on the fly, right from their web browser.
 
@@ -140,21 +139,21 @@ RAFFAELLO is loaded on a static HTML file, so that the user loads it all when co
 
 ## How to use RAFFAELLO
 
-Just reference the main files in the `<head>` section of you HTML page using CDN.
+Just reference the main files in the `<head>` section of you HTML page:
 
 
 ```html
-<!-- The latest version (recommanded) -->
+<!-- RAFFAELLO.js -->
 <script src="https://cdn.jsdelivr.net/npm/raffaello/dist/raffaello.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/raffaello/dist/raffaello.min.css">
 ```
+
+> ✅ No other dependencies are needed — everything is bundled inside
 
 cdn.jsdelivr.net provides CDN support for RAFFAELLO.js's CSS and JavaScript.
 You can use these links:
 - https://cdn.jsdelivr.net/npm/raffaello/dist/raffaello.min.js
 - https://cdn.jsdelivr.net/npm/raffaello/dist/raffaello.min.css
-
-cdn.jsdelivr.net also handles version managment.
 
 Then you can add all the inputs and script elements in you HTML `<body>`. 
 
