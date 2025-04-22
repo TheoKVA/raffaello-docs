@@ -1,13 +1,24 @@
-# RAFFAELLO JavaScript Library 🦦
+# RAFFAELLO.js 🦦
 
 > ⚠️ This project is under proprietary license. 
 <br>Source code is not publicly available. This repository is for documentation, usage examples, bug reports, feature requests, and general discussion.
 
-**RAFFAELLO.js** is a browser-first comprehensive JavaScript library developped for RTS - Radio Television Suisse. It is a seamless solution for remote image creation. It is design to empower users to generate images on the fly, right from their web browser.
+**RAFFAELLO.js** is a browser-first comprehensive JavaScript library developped at [RTS - Radio Television Suisse](https://www.rts.ch/). It is a seamless solution for remote image creation. It is design to empower users to generate images from predefined templates on the fly, right from their web browser.
 
 > 📦 Distributed via CDN
 > <br>🔐 Source code is proprietary
 > <br>📘 Public documentation and examples available
+
+---
+
+## 🚀 Quick Start (CDN)
+
+Include RAFFELLO in your HTML with your license key:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/raffaello@latest/dist/raffaello.min.js" data-license="abc123"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/raffaello@latest/dist/raffaello.min.css">
+```
 
 ---
 

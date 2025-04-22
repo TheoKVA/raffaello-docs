@@ -12,9 +12,8 @@ Just reference the main files in the `<head>` section of you HTML page:
 
 
 ```html
-<!-- RAFFAELLO.js -->
-<script src="https://cdn.jsdelivr.net/npm/raffaello/dist/raffaello.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/raffaello/dist/raffaello.min.css">
+<script src="https://cdn.jsdelivr.net/npm/raffaello@latest/dist/raffaello.min.js" data-license="abc123"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/raffaello@latest/dist/raffaello.min.css">
 ```
 
 > ✅ No other dependencies are needed — everything is bundled inside
@@ -102,7 +101,7 @@ new class {
                 y: 0,
                 width: 1920/2,
                 height: 1080,
-                color: "rgba(1,0,0,1)",
+                color: "rgb(187, 54, 54)",
             });
         });
 
