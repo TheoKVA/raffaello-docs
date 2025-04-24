@@ -5,23 +5,61 @@ description: Introduction page
 slug: /
 ---
 
+<!-- MAIN IMPORTS -->
+import RaffaelloLoader from '@site/src/components/RaffaelloLoader';
+import RaffaelloFullscreen from '@site/src/components/RaffaelloFullscreen';
+
+import TemplateIntro from '@site/src/components/template-intro';
+
 # Introduction
+
+<!-- MAIN LOADING -->
+<RaffaelloLoader license="MXunPm" />
+<RaffaelloFullscreen className="js-previewImage" />
 
 Welcome to the documentation of <b>RAFFAELLO.js</b> !
 
-<b>RAFFAELLO.js</b> is a comprehensive JavaScript library developped for RTS - Radio Television Suisse. It is a seamless solution for remote image creation. It is design to empower users to generate images on the fly, right from their web browser.
-
-This documentation will cover the integration and usage of RAFFAELLO. From typical web application, focusing on specific use cases that demonstrates its features, to more niche solutions to enpower the users with unique abilities.
-
+This documentation will cover the integration and usage of RAFFAELLO.js. From typical web application, focusing on specific use cases that demonstrates its features, to more niche solutions to enpower the users with unique abilities.
 
 ## What is it and why ?
 
-The RAFFAELLO JavaScript library was developped to provide a suite of custom classes and objects for image template creation, manipulation and editing. Allowing users to use custom input images, apply filters, add graphical elements and perform various other editing tasks. 
+**RAFFAELLO.js** is a high-performance JavaScript library for real-time, browser-based image generation. Developed at [RTS - Radio Television Suisse](https://www.rts.ch/) Swiss-French national broadcast company, it empowers designers, editors, and developers to create stunning visual content directly in the browser — no servers, no rendering queues, no fuss.
+
+The RAFFAELLO.js library was developped to provide a suite of custom classes and objects for image template creation, manipulation and editing. Allowing users to use custom input images, apply filters, add graphical elements and perform various other editing tasks. 
+
+## Exemple
+
+Here is a typical exemple of a RAFFAELLO.js integration. A predefined template with an `image input` and custom `text input` integration. 
+
+- Upload any image. You can then adjust it 🙆‍♀️.
+- Then change the text and the title. Pay attention on how the title interact with the text and the blue strap 👀. 
+- Finnaly download back your newlly created image 👌.
+
+<TemplateIntro />
+
+:::note[Key elements 🤔]
+
+Making a template like this with any other software would be quite difficult 
+- The **Auto-scale** of the text, as it reaches a certain width.
+- The **Position-link** between all the elements. Here the heigth of the text will determine the position of the title. This simple feature in itself can open a wide range of possibilities.
+
+:::
+
+The same core principle can be applied whether you're generating:
+- 📱 Social media graphics
+- 📨 Newsletter image illustrations
+- 📰 Editorial visuals for the web
+- 🎥 Video thumbnails for streaming platforms
+- 📺 Key elements for broadcast
+- ➕ And more…
+
+RAFFAELLO.js gives total control over the creative output — instantly, from anywhere, on any device, at scale, and without relying on backend infrastructure.
+
 
 ## How it works
 
-RAFFAELLO is an object-oriented augmented [`Canvas API`](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) library with custom classes to fit it's specific need. It is written in Vanilla JS. 
-The core method is that it creates dedicated `Canvas` HTML elements that you can then easilly manipulate and change on the go. Because it is based on Canvas, a widelly supported feature, all the processing happens on the client browser.
+RAFFAELLO.js is an object-oriented augmented [`Canvas API`](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) library with custom classes to fit it's specific need. It is written in Vanilla JS. 
+The core method is that it creates dedicated `Canvas` HTML elements that you can then easilly manipulate and change on the go. Because it is based on `Canvas` elemets, a widelly supported feature, all the processing happens on the client browser.
 Based on an HTML template the user can create as many images as he needs.
 
 The main addon of RAFFAELLO is that it mimics the way most design software works by having an architecture in layers, that renders atop of each others. 
@@ -41,10 +79,10 @@ The main addon of RAFFAELLO is that it mimics the way most design software works
 ```
 This layer architecture has multiple advantages:
 - `Effects` can be added indivudually on the layers and not blogbally.
-- Drawing `Text` on a layer add dynamic `bound` properties to this layers, wich can be used to draw on another layer using `this.canvas.layers[x].bounds.minX` for exemple.
-- It prevent the need to redraw all the canvas, just to update a small part of it.
+- Drawing elements, like `Text`, on a layer add dynamic `bound` properties to this layers, wich can be used to draw on another layer using `this.canvas.layers[x].bounds.minX` for exemple.
+- It prevent the need to redraw all the canvas, just to update one layer part.
 
-## Features
+## Main features
 
 - **Simplified inputs**: RAFFAELLO streamlines the image creation process by offering a simple set of inputs. Users fill in text content, adjust text fields, and upload images for seamless integration into the final design.
 
@@ -54,27 +92,8 @@ This layer architecture has multiple advantages:
 
 - **Seamless workflow**: Without the complexity of an image editing tool, RAFFAELLO offers a seamless workflow, where users can focus on editorial content without getting bogged down by technical details. Automatic adjustments and intelligent presets ensure a smooth and efficient design process.
 
+## Privacy
 
-## Main files
-
-```text
-raffaello/
-    ├── raffaello.min.js
-    └── raffaello.min.css
-```
-
-RAFFAELLO has 2 main files, `raffaello.min.js` and `raffaello.min.css`.
-
-It has a bundeled depedencie to [cropper.js](https://github.com/fengyuanchen/cropperjs/tree/main), a custom library by **Fengyuan Chen**, to reference input images and be able to crop them to size.
-
-## Basic usage
-
-RAFFAELLO is loaded on a static HTML file, so that the user loads it all when connecting the the page template, then fills the info and the image is created client-side.
-
-The typical worklfow to use RAFFAELLO is:
-1. Add all the necessary inputs in your HTML page
-2. Add a JS script in which you:
-    - Setup an instance of RAFFAELLO, which is equivalent to declaring a hidden blank `Canvas`.
-    - Link all the HTML `Inputs` to the JS variables to make the images.
-    - Draw on the canvas, with successives `Layers`.
-    - Link the `Inputs` changes to specific `Layers` to be redrawn.
+- RAFFAELLO.js is fully working from within your browser 🌐
+- All the data stays on your machine, nothing is uploaded 📤❌
+- No tracking, no ads 🚫

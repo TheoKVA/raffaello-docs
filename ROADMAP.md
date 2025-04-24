@@ -1,5 +1,9 @@
 # 🛣️ Roadmap
 
+Tagline:
+- Image automation meets creative freedom — right in your browser.
+
+
 ## 🔜 To Do
 - Full API reference
 - Full guide reference

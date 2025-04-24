@@ -75,3 +75,356 @@ html[data-theme='dark'] .header--github-link:before {
     background-image: none;
   }
 }
+
+
+
+
+/* 
+  ============
+   MY STYLING 
+  ============
+*/
+
+.small-p {
+  font-size: 15px;
+  line-height: 15px;
+  user-select: none;
+  opacity: .8;
+}
+.small-p-2 {
+  font-size: 14px;
+  line-height: 12px;
+  user-select: none;
+  opacity: .8;
+}
+
+.temp {
+  border: solid green 1px;
+}
+.no-click { 
+  pointer-events: none;
+}
+.no-select {
+  user-select: none;
+}
+.hidden {
+  display: none !important; 
+}
+.pending {
+  opacity:0.3 !important;
+  pointer-events: none;
+}
+.full-width {
+  width: 100%;
+}
+.fill-div {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* width: 50%; */
+}
+.no-decoration { 
+  text-decoration: none; 
+}
+
+/* GUIDE TO FLEX : https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+.flex-column {
+  display: flex;
+  flex-direction: row ;
+  align-items: stretch;
+}
+.flex-row {
+  display: flex;
+  flex-direction: column ;
+  align-items: stretch;
+}
+.flex {
+  display: flex;
+  align-items: stretch;
+}
+
+.separateur {
+  border-left: solid #bebed2 1px;
+  opacity: 0.5;
+  width: 0%;
+}
+.separateur-horizontal {
+  border-bottom: solid #cdcddd 1px;
+  width: 100%;
+}
+
+/* ========== */
+/*  TEMPLATE  */
+/* ========== */
+
+.css-template-container * {
+  box-sizing: border-box;
+  margin: 0px;
+}
+.css-template-container {
+  /* width: 100%; */
+  padding : 20px 20px; /* marges internes */
+  /* margin: 0px; */
+  /* margin-bottom: 36px; marges externes */
+
+  background: transparent;
+  border: solid var(--ifm-color-emphasis-300) 1px;
+  border-radius: var(--ifm-pagination-nav-border-radius);
+  /* border-radius: 8px; */
+  /* box-shadow: inset 0 0 1px #bebed2, 0 1px 3px rgba(32, 32, 72, 0.12); */
+}
+.css-template-container img:not(.icon) {
+  position: relative;
+  width: 100%;
+  border: solid var(--ifm-color-emphasis-300) 1px;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: inset 0 0 1px #bebed2, 0 1px 2px rgba(32, 32, 72, 0.12);
+}
+
+
+/* ============ */
+/*    INPUTS   */
+/* ============ */
+
+.css-template-container input:not([type='range']), select, textarea {
+  --background: #fff;
+  --border-default: #D0D0DF;
+  --border-active: #3D6DF9;
+  --shadow-default: rgba(32, 32, 72, 0.12);
+  --shadow-active: rgba(61, 109, 249, 0.25);
+  --text-color: #818190;
+  --placeholder-color: #C9C9D9;
+  --placeholder-color-hover: #BABAC9;
+
+  position: relative;
+
+  width: auto;
+  min-width: 0;
+  padding: 9px 14px;
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-color);
+  background: var(--background);
+  border: none;
+  outline: none;
+  box-shadow: inset 0 0 0 var(--border-width, 1px) var(--border, var(--border-default)), 0 1px 3px var(--shadow, var(--shadow-default));
+
+  transition: box-shadow 0.2s;
+  -webkit-transition: box-shadow 0.2s;
+  -o-transition: box-shadow 0.2s;
+  -moz-transition: box-shadow 0.2s;
+}
+.css-template-container input:not([type='range']) {
+  height: 40px;
+}
+.css-template-container input:hover, select:hover, textarea:hover {
+  --border: var(--border-active);
+}
+.css-template-container input:focus-within, textarea:focus-within {
+  --border-width: 1.5px;
+  --border: var(--border-active);
+  --shadow: var(--shadow-active);
+}
+.css-template-container input::-moz-placeholder {
+  color: var(--placeholder-color);
+}
+.css-template-container input:-ms-input-placeholder {
+  color: var(--placeholder-color);
+}
+.css-template-container input::placeholder, textarea::placeholder {
+  color: var(--placeholder-color);
+}
+.css-template-container select {
+  /* Removing the default arrow */
+  -webkit-appearance: none;
+  appearance: none;
+
+  /* Custom arrow */
+  /* background-image: url("/raffaello/src/svg/caret-down.svg"); */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="enable-background:new 0 0 48 48" viewBox="0 0 48 48"><path d="m24 30.8-12-12 2.1-2.1 9.9 9.9 9.8-9.9 2.2 2.1-12 12z" style="fill:%23818190"/></svg>') no-repeat;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: calc(100% - 8px) center;
+}
+.css-template-container input[type="range"] {
+  padding: 0px 0px;
+  opacity: .8;
+}
+.css-template-container input[type="date"]::-webkit-calendar-picker-indicator {
+  background-size: 0px;
+}
+.css-template-container .date-input {
+  /* background: url("/svg/calendar.svg") no-repeat; */
+  /* ON A PAS LE CALENDAR */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="enable-background:new 0 0 48 48" viewBox="0 0 48 48"><path d="m24 30.8-12-12 2.1-2.1 9.9 9.9 9.8-9.9 2.2 2.1-12 12z" style="fill:%23818190"/></svg>') no-repeat;
+  background-color: var(--background);
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 10px) center;
+}
+
+
+/* ============ */
+/*    BUTTONS   */
+/* ============ */
+
+.css-template-container button:not(.simple-button)  {
+  --background-default: #74767e;
+  /* --background-default: #6c7491; */
+  /* --background-default: #4573ff; */
+  --background-hover: #2057ff;
+  /* --background-sucess: #16a400; */
+  /* --background-error: #b80606; */
+
+  position: relative;
+  border: none;
+  cursor: pointer;
+
+  width: auto;
+  height: 40px;
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--background-default);
+
+  transition: background-color .3s ease-in-out;
+  -webkit-transition: background-color .3s ease-in-out;
+  -o-transition: background-color .3s ease-in-out;
+  -moz-transition: background-color .3s ease-in-out;
+}
+.css-template-container button:not(.simple-button):hover {
+  background-color: var(--background-hover);
+}
+/* button .success {
+  background-color: var(--background-sucess) !important;
+}
+button .error {
+  background-color: var(--background-error) !important;
+} */
+/* button[disabled] {
+  opacity: 0.6;
+  pointer-events: none;
+} */
+/****  magic trick  *****/
+.css-template-container button svg path{
+  fill: currentcolor;
+}
+.css-template-container button img{
+  height: 100% ;
+  width: auto !important;
+  color:#fff;
+
+  /* Cancel <img> style */
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+
+
+
+/* =========== */
+/*    SWITCH   */
+/* =========== */
+/* 
+  Dans l'HTML on veut:
+
+  <label class="switch">
+      <input type="checkbox">
+      <span class="slider round"></span>
+  </label>
+
+  const isChecked = row.querySelector('input[type="checkbox"]').checked;
+*/
+
+:root {
+  --switch-width: 33px;
+  --switch-height: 18px;
+  --switch-padding: 3px;
+  --switch-color-on: #4573ff;
+  --switch-color-off: #afac9a;
+  --switch-color-toggle: white;
+}
+
+/* Hide default HTML checkbox */
+.css-template-container .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+/* The switch - the box around the slider */
+.css-template-container .switch {
+  position: relative;
+  display: inline-block;
+  width: var(--switch-width);
+  height: var(--switch-height);
+}
+/* The slider */
+.css-template-container .slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--switch-color-off);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.css-template-container .slider:before {
+  position: absolute;
+  content: "";
+  height: calc( var(--switch-height) - (2 * var(--switch-padding)) );
+  width: calc( var(--switch-height) - (2 * var(--switch-padding)) );
+  left: var(--switch-padding);
+  bottom: var(--switch-padding);
+  background-color: var(--switch-color-toggle);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.css-template-container input:checked + .slider {
+  background-color: var(--switch-color-on);
+}
+.css-template-container input:focus + .slider {
+  box-shadow: 0 0 1px var(--switch-color-on);
+}
+
+.css-template-container input:checked + .slider:before {
+  -webkit-transform: translateX( calc( var(--switch-width) - var(--switch-height)) );
+  -ms-transform: translateX( calc( var(--switch-width) - var(--switch-height)) );
+  transform: translateX( calc( var(--switch-width) - var(--switch-height)) );
+}
+
+/* Rounded sliders */
+.css-template-container .slider.round {
+  border-radius: calc( var(--switch-height)/2 );
+}
+.css-template-container .slider.round:before {
+  border-radius: 50%;
+}
+
+
+/* ======= */
+/*  OTHER  */
+/* ======= */
+
+.small-code pre code {
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.raffaello-upload {
+  background-color: transparent;
+}

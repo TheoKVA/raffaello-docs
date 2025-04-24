@@ -1,0 +1,266 @@
+<script>
+
+// ----------------------------------------------------------------------------------------------------------------------------------
+// SINGLE IMAGE INPUT
+
+        // Initialisation V1
+        this.inputImage = new Raffaello_ImageCropper( this.container, {
+            width: 1920,
+            height: 1080,
+            onImageReady: () => { // Au changement d'une image
+                // On lance le dessin du canvas
+                this.initiateDrawing();
+            },
+            onCrop: () => { // Quand on a un crop en cours
+            },
+            onCropStart: () => { // Quand le crop commence
+                this.canvas.previewContainer.style.opacity = 0.5;
+            },
+            onCropEnd: () => { // Quand le crop termine
+                this.canvas.previewContainer.style.opacity = 1;
+                this.canvas.updateLayers([0]);
+            },
+            onFilterChange: () => { // Quand on change les parametres de filtres
+                this.canvas.updateLayers([0]);
+            },
+        });
+        // (ou)
+        this.inputImage = new Raffaello_ImageCropper( this.container, {
+            width: 1080,
+            height: 1197,
+            layerIndex: 0,
+            layerRef: this,
+        });
+
+        // DESSIN
+        this.canvas.addLayer().draw(function() {
+            this.drawImageInput(thisTemplate.inputImage, 0, 0);
+            this.applyFilter(thisTemplate.inputImage.config.filter);   
+        });
+        // (ou)
+        this.canvas.addLayer().draw(function() {
+            this.drawImage(
+                thisTemplate.inputImage.config.rawImage, 
+                Math.round(thisTemplate.inputImage.config.cropInfo.x), 
+                Math.round(thisTemplate.inputImage.config.cropInfo.y), 
+                Math.round(thisTemplate.inputImage.config.cropInfo.width), 
+                Math.round(thisTemplate.inputImage.config.cropInfo.height), 
+                0, 0, 
+                Math.round(thisTemplate.inputImage.config.width), 
+                Math.round(thisTemplate.inputImage.config.height)
+            );
+            this.applyFilter(thisTemplate.inputImage.config.filter);   
+        });
+
+
+// ----------------------------------------------------------------------------------------------------------------------------------
+// MULTIPLE IMAGE INPUT
+
+        // MULTIPLE IMAGES
+        // Initialize the image croppers
+        const imageConfigs = [
+            { selector: '.js-imageInputTeam1', width: 735, height: 1080, layerIndex: 0},
+            { selector: '.js-imageInputTeam2', width: 735, height: 1080, layerIndex: 1},
+            { selector: '.js-imageInputLogo1', width: 352, height: 352, layerIndex: 3, viewMode:0, zoomOnWheel: 1},
+            { selector: '.js-imageInputLogo2', width: 352, height: 352, layerIndex: 3, viewMode:0, zoomOnWheel: 1, isOptionnal: true}
+        ];
+        this.batchImageCropper = new Raffaello_BatchImageCropper(this, imageConfigs);
+        this.inputImage = this.batchImageCropper.inputImages;
+
+
+        // DESSIN
+        this.canvas.addLayer().draw(function() {
+            this.drawImageInput(thisTemplate.inputImage[0], 0, 0);
+            this.applyFilter(thisTemplate.inputImage.config.filter);   
+        });
+        // (ou)
+        this.canvas.addLayer().draw(function() {
+            this.drawImage(
+                thisTemplate.inputImage[0].config.rawImage, 
+                Math.round(thisTemplate.inputImage[0].config.cropInfo.x), 
+                Math.round(thisTemplate.inputImage[0].config.cropInfo.y), 
+                Math.round(thisTemplate.inputImage[0].config.cropInfo.width), 
+                Math.round(thisTemplate.inputImage[0].config.cropInfo.height), 
+                0, 0, 
+                Math.round(thisTemplate.inputImage[0].config.width), 
+                Math.round(thisTemplate.inputImage[0].config.height)
+            );
+            this.applyFilter(thisTemplate.inputImage[0].config.filter);   
+        });
+
+        
+// ----------------------------------------------------------------------------------------------------------------------------------
+// SLIDER INPUT
+
+    // <p class="small-p" >Ajustement Ombre</p>
+    // <input class="js-shadow" type="range" min="0" max="100" value="50">
+    this.container.querySelector('.js-slider').addEventListener('input', () => this.canvas.updateLayers([1]));
+    // puis
+    const SLIDER_VALUE = thisTemplate.container.querySelector('.js-slider').value;
+
+// ----------------------------------------------------------------------------------------------------------------------------------
+// SELECT INPUT
+
+    // <select class="js-select">
+    //     <option value="CLASSIQUE" selected>Video classique</option>
+    //     <option value="CITATION">Video citation</option>
+    // </select>
+    this.container.querySelector('.js-select').addEventListener('input', () => this.canvas.updateLayers([1]));
+    // puis
+    const IS_UP = thisTemplate.container.querySelector('.js-select').value == 'UP';
+
+// ----------------------------------------------------------------------------------------------------------------------------------
+// CHECKBOX INPUT
+
+    // <div class="flex-column full-width" style="gap:6px">
+    //     <label class="switch">
+    //         <input type="checkbox" class="js-checkbox">
+    //         <span class="slider round"></span>
+    //     </label>
+    //     <p class="small-p" style="margin-top: 2px;" >Texte en noir (fonds clair)</p>
+    // </div>
+    this.container.querySelector('.js-checkbox').addEventListener('input', () => this.canvas.updateLayers([1]));
+    // Puis
+    const IS_CHECKED = thisTemplate.container.querySelector('.js-checkbox').checked;
+
+
+// ----------------------------------------------------------------------------------------------------------------------------------
+// DRAW TEXT
+
+    // <textarea class="js-textInput" placeholder="Ajouter un texte" rows="6" style="resize: none">Lorem ipsum &#10;dolor sit amet.</textarea>
+ 
+        // LAYER X // TEXTE
+        this.canvas.addLayer().draw(function() {
+            this.drawText({
+                text: thisTemplate.container.querySelector('.js-texte').value,
+                fontFamily: 'RTSNeue-Medium',
+                fontSize: 30,
+                fontLineHeight: 34,
+                fontKerningOptical: true, // default false - (optionnal)
+                fontLetterSpacing: 0, // default 0 - (in prct) - (optionnal)
+                fontFillColor: 'white',
+                textAlign: { // (optionnal)
+                    horizontal: 'left', // default left - left / center / right
+                    vertical: 'bottom', // default bottom - top / center / bottom
+                },
+                textBaseline: 'hanging', // default 'alphabetic' (optionnal)
+                anchorPoint: 'true', // default none - none / true / L - (optionnal)
+                position: {
+                    pos_x: 40,
+                    pos_y: thisTemplate.canvas.layers[2].bounds?.minY ? thisTemplate.canvas.layers[2].bounds?.minY - 60 : 96 ,
+                    max_width: 0, // default 0 - 0 > no limit - (optionnal)
+                    max_width_rescale: false, // default false - false: line break | true: rescale - (optionnal)
+                    max_lines: 0, // default 0 - 0 > no limit - (optionnal)
+                    ignore_empty_lines: true, // default true - (optionnal)
+                    ignore_double_spaces: true, // default true - (optionnal)
+                },
+                bounds: [ true, false ], // default  [ true, true ] - include_ascent?, include_descent? - (optionnal)
+                highlight: { // Change le style entre de '§' - (optionnal)
+                    fontFamily: 'RTSNeueACTU-ExtraLight',
+                    fontSize: 30,
+                    fontLetterSpacing: 0,
+                    fontFillColor: 'white',
+                },
+                background: 'red', // (optionnal)
+                background: { // (optionnal)
+                    fill_color: 'rgba(0, 255, 0, 0.0)',
+                    stroke: { // (optionnal)
+                        color: 'rgba(0, 255, 0, 1.0)', // default 'black'
+                        width: 16, // default 10
+                    },
+                    round_radius: 0, // default 0 - (optionnal)
+                    margins: { // default 0 - (optionnal)
+                        top: 0,
+                        bottom: 0,
+                        right: 0,
+                        left: 0,
+                    },
+                },
+            });
+            this.applyFilter(
+                'drop-shadow(0px 0px 60px rgb(0 0 0 / 70%))'
+            )
+        });
+
+            
+// ----------------------------------------------------------------------------------------------------------------------------------
+// DRAW OVERLAY 
+
+        // Au ROOT
+        const img_degrade = new Raffaello_Image({ url: 'ig-rtssport/src/rtssport_DEGRADE.png'});
+
+        // Dans la global class
+        // Initialisation des éléments fixes
+        this.img_overlay = new Raffaello_Image({ url: 'tv-rtssport/src/EURO_overlay.png'});
+
+        // LAYER X // OVERLAY
+        this.canvas.addLayer().draw(function() {
+            this.drawImage(thisTemplate.img_overlay.img, 0, 0);
+        });
+
+// ----------------------------------------------------------------------------------------------------------------------------------
+// DRAW GRADIENT
+
+        // LAYER X // 
+        this.canvas.addLayer().draw(function() {
+            this.drawGradient({
+                x: 10,
+                y: 10,
+                width: 90,
+                height: 80,
+                direction: 'UP', // 'UP', 'RIGHT', 'DOWN', 'LEFT'
+                gradient: [
+                    [0.0, `rgba(0,0,0, 1)`], // Start
+                    [0.4, `rgba(0,0,0, 0.5)`], // Middle
+                    [1.0, `rgba(0,0,0, 0)`], // End
+                ]
+            });
+        });
+
+// ----------------------------------------------------------------------------------------------------------------------------------
+// DRAW RECTANGLE
+
+        // LAYER X // 
+        this.canvas.addLayer().draw(function() {
+            this.drawRect({
+                x: 285,
+                y: 0,
+                width: 300,
+                height: 1080,
+                color: "rgba(0,0,0,0.5)",
+                radius: 0,
+            })
+        });
+        
+
+// ----------------------------------------------------------------------------------------------------------------------------------
+// DRAW CUSTOM SHAPE
+        
+        // LAYER X // 
+        this.canvas.addLayer().draw(function() {
+            this.context.beginPath();
+            this.context.moveTo(x_1, y_1)
+            this.context.lineTo(x_2, y_2);
+            this.context.lineTo(x_3, y_3);
+            this.context.lineTo(x_1, y_1);
+            this.context.closePath();
+            this.context.fillStyle = '#777777';
+            this.context.fill();
+        });
+
+        
+// ----------------------------------------------------------------------------------------------------------------------------------
+// DRAW FILTRES
+
+        // AVANT
+        this.prepareFilter("blur(17px)");
+        // (ou)
+        this.context.filter = "blur(17px)";
+
+        // APRES
+        this.applyFilter("blur(17px)");
+
+        // (Penser à élargir l'image)
+
+
+</script>
