@@ -1,12 +1,8 @@
----
-sidebar_position: 1
----
-
-# Raffaello_Canvas()
-
-## Description
+# Raffaello_Canvas
 
 This is the main class that you should create, within the constructor of the global class. This will create the hidden canvas, the main structure, on wich you will add layers and render as a whole.
+
+## Usage
 
 ```javascript
 // (Within the constructor of the global class)
@@ -68,11 +64,9 @@ The `type` is a parameter that will define the compositing operation to apply wh
 - When the `'type'` is defined `'effect'`, the **blend style** is equivalent to the second parameter `'style'`. It can take as a value all the available globalCompositeOperation properties. See [Blending modes](#to-do).
 - When the `'type'` is defined `'alpha'`, the layer will only appear where the next layer will be drawn. See [Alpha mode](#to-do).
 
-**Typical syntax:**
+**Usage**
 
 ```javascript
-// (Within the initiateDrawing() of the global class)
-
 this.canvas.addLayer().draw(function() {
     // Draws with 'normal' blending mode
 });
@@ -100,3 +94,5 @@ Description.
 | `array`  | `integer Array` | The layer to add to `this.layers` |
 
 **Returns:** `void`
+
+**Usage**

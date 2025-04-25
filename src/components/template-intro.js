@@ -47,7 +47,7 @@ export default function template() {
                     });
 
                     // Input image
-                    this.overlay = new Raffaello_Image({ url: '/raffaello-docs/assets/img/elem/raffaello-logo.png'});
+                    this.img_overlay = new Raffaello_Image({ url: '/raffaello-docs/assets/img/elem/raffaello-logo.png'});
 
                     // Interactions
                     this.container.querySelector('.js-textInput').addEventListener('input', () => this.canvas.updateLayers([2,3]));
@@ -161,6 +161,18 @@ export default function template() {
                         });
                         
                     });
+
+                    // LAYER 4 // IMAGE
+                    this.canvas.addLayer().draw(function() {
+                        this.drawImage(
+                            thisTemplate.img_overlay.img, // Image ref
+                            863, 26, // Position
+                            197, 197 // Taille
+                        );
+                        this.applyFilter(
+                            'drop-shadow(-8px 8px 50px rgb(0 0 0 / 40%))'
+                        )
+                    });
             
                     // On fait le rendu
                     this.canvas.renderPreview();
@@ -209,7 +221,7 @@ export default function template() {
 
                     {/* PREVIEW AND DOWNLOAD */}
                     <div className="flex-row pending" style={{ width: '30%', gap: '15px' }}>
-                        <img className="js-previewImage center" src="web-rtsch/src/preview_GENERAL_simple.jpg" alt="preview" style={{ width: '100%' }}/>
+                        <img className="js-previewImage center" src="/raffaello-docs/assets/img/preview/template-intro.jpg" alt="preview" style={{ width: '100%' }}/>
                         <div className="flex-column" style={{ gap: '10px' }}>
                             <input className="js-fileNameInput" type="text" placeholder="File Name" defaultValue='myNewPic.jpg' style={{ flexGrow: 1 }} />
                             <button className="js-downloadButton" style={{ width: '100px' }}>

@@ -19,15 +19,15 @@ import TemplateIntro from '@site/src/components/template-intro';
 
 Welcome to the documentation of <b>RAFFAELLO.js</b> !
 
-This documentation will cover the integration and usage of RAFFAELLO.js. From typical web application, focusing on specific use cases that demonstrates its features, to more niche solutions to enpower the users with unique abilities.
+- 🤩 **RAFFAELLO.js** is a high-performance JavaScript library for real-time, browser-based image generation. Developed at [RTS - Radio Television Suisse](https://www.rts.ch/) Swiss-French national broadcast company, it empowers designers, editors, and developers to create stunning visual content directly in the browser — no servers, no rendering queues, no fuss.
 
-## What is it and why ?
+- 📄 This documentation will cover the integration and usage of RAFFAELLO.js. From typical web application, focusing on specific use cases that demonstrates its features, to more niche solutions to enpower the users with unique abilities.
 
-**RAFFAELLO.js** is a high-performance JavaScript library for real-time, browser-based image generation. Developed at [RTS - Radio Television Suisse](https://www.rts.ch/) Swiss-French national broadcast company, it empowers designers, editors, and developers to create stunning visual content directly in the browser — no servers, no rendering queues, no fuss.
+- ✨ The **RAFFAELLO.js** library was developped to provide a suite of custom classes and objects for image template creation, manipulation and editing. Allowing users to use custom input images, apply filters, add graphical elements and perform various other editing tasks. 
 
-The RAFFAELLO.js library was developped to provide a suite of custom classes and objects for image template creation, manipulation and editing. Allowing users to use custom input images, apply filters, add graphical elements and perform various other editing tasks. 
+## Fast Track ⏱️
 
-## Exemple
+Understand RAFFAELLO in 30 seconds by playing!
 
 Here is a typical exemple of a RAFFAELLO.js integration. A predefined template with an `image input` and custom `text input` integration. 
 
@@ -39,7 +39,7 @@ Here is a typical exemple of a RAFFAELLO.js integration. A predefined template w
 
 :::note[Key elements 🤔]
 
-Making a template like this with any other software would be quite difficult 
+Making a template like this with any other software would be quite difficult.
 - The **Auto-scale** of the text, as it reaches a certain width.
 - The **Position-link** between all the elements. Here the heigth of the text will determine the position of the title. This simple feature in itself can open a wide range of possibilities.
 
@@ -56,7 +56,7 @@ The same core principle can be applied whether you're generating:
 RAFFAELLO.js gives total control over the creative output — instantly, from anywhere, on any device, at scale, and without relying on backend infrastructure.
 
 
-## How it works
+## Technology
 
 RAFFAELLO.js is an object-oriented augmented [`Canvas API`](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) library with custom classes to fit it's specific need. It is written in Vanilla JS. 
 The core method is that it creates dedicated `Canvas` HTML elements that you can then easilly manipulate and change on the go. Because it is based on `Canvas` elemets, a widelly supported feature, all the processing happens on the client browser.
@@ -82,18 +82,22 @@ This layer architecture has multiple advantages:
 - Drawing elements, like `Text`, on a layer add dynamic `bound` properties to this layers, wich can be used to draw on another layer using `this.canvas.layers[x].bounds.minX` for exemple.
 - It prevent the need to redraw all the canvas, just to update one layer part.
 
-## Main features
+## Features
 
-- **Simplified inputs**: RAFFAELLO streamlines the image creation process by offering a simple set of inputs. Users fill in text content, adjust text fields, and upload images for seamless integration into the final design.
+- 🧩 **Simplified inputs**: RAFFAELLO streamlines the image creation process by offering a simple set of inputs. Users fill in text content, adjust text fields, and upload images for seamless integration into the final design.
 
-- **Intuitive UI**: Designed with simplicity in mind, it offers an intuitive UI that makes image creation effortless. With streamlined workflows and user-friendly controls, making visuals is a breeze for users of all skill levels.
+- 🖱️ **Intuitive UI**: Designed with simplicity in mind, it offers an intuitive UI that makes image creation effortless. With streamlined workflows and user-friendly controls, making visuals is a breeze for users of all skill levels.
 
-- **Client-Side rendering**:  all image generation occurs client-side, without any server-side processing. This approach ensures fast and responsive performance, enabling users to preview and fine-tune their designs in real-time.
+- 🖥️ **Client-Side rendering**:  all image generation occurs client-side, without any server-side processing. This approach ensures fast and responsive performance, enabling users to preview and fine-tune their designs in real-time.
 
-- **Seamless workflow**: Without the complexity of an image editing tool, RAFFAELLO offers a seamless workflow, where users can focus on editorial content without getting bogged down by technical details. Automatic adjustments and intelligent presets ensure a smooth and efficient design process.
+- 🔁 **Seamless workflow**: Without the complexity of an image editing tool, RAFFAELLO offers a seamless workflow, where users can focus on editorial content without getting bogged down by technical details. Automatic adjustments and intelligent presets ensure a smooth and efficient design process.
 
 ## Privacy
 
 - RAFFAELLO.js is fully working from within your browser 🌐
 - All the data stays on your machine, nothing is uploaded 📤❌
 - No tracking, no ads 🚫
+
+## Something missing?
+
+If you find issues with the documentation or have suggestions on how to improve the documentation or the project in general, please [file an issue](https://github.com/TheoKVA/raffaello-docs/issues) ! 🚀

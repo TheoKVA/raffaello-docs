@@ -61,7 +61,7 @@ export default {
       // NAVIGATION BAR
       // ==============
       navbar: {
-        title: 'RAFFAELLO Documentation',
+        title: 'RAFFAELLO.js',
         logo: {
           alt: '',
           src: 'img/logo.png',
