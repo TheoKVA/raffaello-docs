@@ -16,7 +16,7 @@ export default function RaffaelloLoader({ license = 'MXunPm' }) {
         if (!document.getElementById(scriptId)) {
             const script = document.createElement('script');
             script.id = scriptId;
-            script.src = 'https://cdn.jsdelivr.net/npm/raffaello@1.1.2/dist/raffaello.min.js';
+            script.src = 'https://cdn.jsdelivr.net/npm/raffaello@1.2.0/dist/raffaello.min.js';
             script.setAttribute('data-license', license);
             script.async = true;
             document.head.appendChild(script);
