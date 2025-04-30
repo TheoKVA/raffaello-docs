@@ -1,0 +1,92 @@
+# Global Class Object
+
+import CodeBlock from '@theme/CodeBlock';
+
+**RAFFAELLO** is a class object based library. The idea is that for every RAFFAELLO template in your page you have to declare an **unnamed class instantiated inline**. This class shoud only holds a `constructor()` and a method `initiateDrawing()`.
+
+```javascript
+new class {
+    constructor() { 
+        // Initialization logic
+    }
+    templateInstructions() {
+        // Drawing logic
+    }
+}
+```
+
+This class will be the rendering unit for a signle Raffaello-based canvas. You can have as many unnamed class as you like in a page.
+Each one will encapsulate all the necessary setup and rendering logic inside a single object, enabling modular, clean, and reusable rendering flows.
+
+This class pattern encourages a clear separation of responsibilities:
+
+| Phase | Purpose |
+| :--- | :--- |
+| `constructor()` | Initialization of canvas, inputs, and DOM interactions |
+| `templateInstructions()` | All layered drawing logic for preview and export |
+
+## constructor()
+
+Within the constructor, you initialize all the element for the template.
+
+<CodeBlock className="small-code" language="javascript" title='Usage exemple'>
+{`new class {
+    constructor() { 
+        // Get the DOW container
+        this.container = document.querySelector('#abcdef');
+
+        // Main canvas initialization
+        this.canvas = new Raffaello_Canvas({ ... });
+
+        // Image input initialization
+        ...
+
+        // Other inputs interactions
+        ...
+
+        // Download logic
+        ...
+    }
+
+    templateInstructions() { ... }
+}`}
+</CodeBlock>
+
+You must define and maintain some key instance properties to ensure the rendering logic works correctly. These properties are required and should follow strict naming conventions:
+
+| Property | Required | Type | Description |
+| :--- | :--- | :--- | :--- |
+| `this.container` | ✅ | HTMLElement | The root DOM container that holds all related inputs. |
+| `this.canvas` | ✅ | Raffaello_Canvas | The main canvas rendering engine. Used to create layers, draw, and export images. |
+
+## templateInstructions()
+
+This methods will hold all the instructions to create the templated image. It should be named `templateInstructions()` as some core function expect this name.
+
+**Typical Usage**
+
+
+<CodeBlock className="small-code" language="javascript" title='Usage exemple'>
+{`new class {
+    constructor() { ... }
+
+    templateInstructions() {
+        // Capture the context of the template
+        const thisTemplate = this;
+
+        // LAYER 0
+        this.canvas.addLayer().draw(function() {
+            ... 
+        });
+
+        // LAYER 1
+        this.canvas.addLayer().draw(function() {
+            ... 
+        });
+
+        // ETC.
+    }
+}`}
+</CodeBlock>
+
+

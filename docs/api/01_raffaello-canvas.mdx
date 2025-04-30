@@ -1,0 +1,230 @@
+# Raffaello_Canvas
+
+import CodeBlock from '@theme/CodeBlock';
+import APITable from '@site/src/components/APITable';
+
+```javascript
+new Raffaello_Canvas({ options })
+```
+
+This is the main class that you should create, within the **constructor** of the **global class**. This will create the hidden canvas, the main structure, on wich you will add layers and render as a whole.
+
+## Usage
+
+```javascript title="Condensed version"
+this.canvas = new Raffaello_Canvas({ 
+    width: 1920,
+    height: 1080,
+    previewContainer: this.container.querySelector('.js-previewImage'),
+    nameInputContainer: this.container.querySelector('.js-fileNameInput'),
+});
+```
+
+<CodeBlock className="small-code" language="javascript" title='Extended version'>
+{`this.canvas = new Raffaello_Canvas({
+    width: 1080,
+    height: 1350,
+    previewContainer: this.container.querySelector('.js-previewImage'),
+    previewBackgroundColor: 'white', // (Optional) or style='background-color:...' on the previewContainer
+    nameInputContainer: this.container.querySelector('.js-fileNameInput'),
+    name: 'raffaelloImage.jpg' // (Optional) Default to nameInputContainer value
+    previewQuality: 0.9, // (Optional) Default to '0.8'
+    renderQuality: 0.96, // (Optional) Default to '0.96'
+    cornerRadius: 0, // (Optional) Default to '0'
+});`}
+</CodeBlock>
+
+
+:::note[Naming convention]
+
+The instance must be called **`this.canvas`** within the **constructor()** of the **global class object**, as a lot of later options rely on this name.
+
+:::
+
+## Constructor Options
+
+```mdx-code-block
+<APITable>
+```
+
+| Name | Type | Default | Description | 
+| :--- | :--- | :--- | :--- |
+| `width` | number | `1000` | Width of the canvas (in pixels) |
+| `height` | number | `1000` | Height of the canvas (in pixels) |
+| `previewContainer` | HTMLElement | *`null`* | ... |
+| `previewBackgroundColor` | CSS color | `'white'` | *Optional* - ... |
+| `nameInputContainer` | HTMLElement | *`null`* | *Optional* - An HTMLElement to define the name of the final image. Typically an `input` type. The name is grabbed using `this.nameInputContainer.value`. If nothing is provided the generated file will be named after the `name` option. |
+| `name` | string | `'Image_Raffaello.jpg'` | *Optional* - If no `nameInputContainer` is provided, the name of the final image. |
+| `previewQuality` | number | `0.8` | *Optional* - ... |
+| `renderQuality` | number | `0.96` | *Optional* - ... |
+| `cornerRadius` | number | `0` | *Optional* - Defines the corner roundness in pixels. A value of `0` means square corners. Make sure the output is in PNG format to see it. |
+
+```mdx-code-block
+</APITable>
+```
+
+## Initiated Properties
+
+| Property | Type | Description | 
+| :--- | :--- | :--- |
+| `this.layers` | `Array<Object>` | An array containing all the `Raffaello_CanvasLayer` objects that will create the final image |
+
+---
+
+## Public methods
+
+
+### .addLayer()
+
+The main method to create a `Raffaello_CanvasLayer` in the parameter array `Raffaello_Canvas.layers`.
+This methods should typically be called within the **`initiateDrawing()`** function of the **global class**.
+
+<CodeBlock className="small-code" language="javascript" title='Usage exemple'>
+{`new class {
+    constructor() { ... }
+    templateInstructions() {
+
+        // Draws with 'normal' blending mode
+        // highlight-start
+        this.canvas.addLayer().draw(function() {
+            ...
+        });
+        // highlight-end
+
+        // Draws with 'multiply' blending mode
+        // highlight-start
+        this.canvas.addLayer('effect', 'multiply').draw(function() {
+            ...
+        });
+        // highlight-end
+
+        // Drawing only appears where the next layer alpha is present
+        // highlight-start
+        this.canvas.addLayer('alpha').draw(function() {
+            ...
+        });
+        // highlight-end
+
+    }
+}`}
+</CodeBlock>
+
+:::warning[Layer Ordering]
+
+Be mindful of the order in which layers are added on the canvas. Layers are rendered in the sequence they are drawn, so the order will highly affect the final output.
+
+```text
+         FINAL IMAGE
+     ╒════════════════╕
+     │                │
+   ╒═╧══════════════╕ │
+   │ ┊              │ │
+ ╒═╧══════════════╕ │ │ > FIRST Raffaello_CanvasLayer drawn
+ │ ┊ └ ┉ ┉ ┉ ┉ ┉  │ ╞═╛
+ │ ┊              │ │ > SECOND Raffaello_CanvasLayer drawn
+ │ └ ┉ ┉ ┉ ┉ ┉ ┉  ╞═╛
+ │                │ > THIRD Raffaello_CanvasLayer drawn
+ ╘════════════════╛
+```
+
+:::
+
+**Parameters:**
+
+```javascript
+.addLayer(type = 'normal', style = null)
+```
+
+| # | Name | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | `type`  | String | `'normal'` | *Optional* - The layer type. `'normal'` / `'effect'` / `'alpha'` |
+| 2 | `style`  | String | *`null`* | *Optional* - The second parameter, when the type is defined `'effect'` |
+
+**Returns:** a new instance of a `Raffaello_CanvasLayer`
+
+The `type` is a parameter that will define the compositing operation to apply when drawing the layer, similar to a **blend style** fusion parameter. It defines the parameter **globalCompositeOperation** when drawing on the canvas, see the complete [documentation](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation).
+
+| `Type` | Description  |
+| :--- | :--- |
+| `'normal'` | The **blend style** is equivalent to globalCompositeOperation 'normal'. |
+| `'effect'` | The **blend style** is equivalent to globalCompositeOperation second parameter `style`. It can be any of [globalCompositeOperation properties](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation). |
+| `'alpha'` | The **blend style** is equivalent to globalCompositeOperation 'source-in' to the following drawn layer. |
+
+
+---
+
+### .updateLayers()
+
+Triggers a partial re-render of one or more canvas layers by their index.
+
+This is useful for improving performance or reacting to user input (e.g. live text updates or slider-driven changes) without re-rendering the entire canvas stack.
+
+<CodeBlock className="small-code" language="javascript" title='Usage exemple'>
+{`new class {
+    constructor() { 
+        this.canvas = new Raffaello_Canvas({ ... });
+
+        ...
+
+        // Text input interaction
+        // highlight-next-line
+        this.container.querySelector('.myTextInput').addEventListener('input', () => this.canvas.updateLayers([3,4]));
+
+        ...
+    }
+    templateInstructions() { ... }
+}`}
+</CodeBlock>
+
+**Parameters:**
+
+```javascript
+.updateLayers(array)
+```
+
+| Name | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `array`  | integer Array | *`null`* | The index of the layers to update. Base 0 |
+
+**Returns:** 
+
+`void` — This method performs a side effect (selectively redraws layers). It does not return any value.
+
+---
+
+### .downloadImage()
+
+Triggers the rendering and download of the current canvas state as an image file.
+
+This method finalizes the layers, converts the rendered canvas into an image, and automatically prompts the user to download the result (e.g. `'Image_Raffaello.jpg'`).
+
+<CodeBlock className="small-code" language="javascript" title='Usage exemple'>
+{`new class {
+    constructor() { 
+        this.canvas = new Raffaello_Canvas({ ... });
+
+        ...
+
+        // Download logic
+        // highlight-next-line
+        this.container.querySelector('.myButton').addEventListener('click', () => this.canvas.downloadImage());
+    }
+    templateInstructions() { ... }
+}`}
+</CodeBlock>
+
+Complementary info.
+
+**Parameters:**
+
+```javascript
+.downloadImage()
+```
+
+*None.*
+
+**Returns:** 
+
+`void` — This method performs a side effect (downloads the image). It does not return any value
+
+---
