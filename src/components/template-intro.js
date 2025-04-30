@@ -167,7 +167,7 @@ export default function template() {
                         this.drawImage(
                             thisTemplate.img_overlay.img, // Image ref
                             863, 26, // Position
-                            197, 197 // Taille
+                            384*0.5, 333*0.5 // Taille
                         );
                         this.applyFilter(
                             'drop-shadow(-8px 8px 50px rgb(0 0 0 / 40%))'
