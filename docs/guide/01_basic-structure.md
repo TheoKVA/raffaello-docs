@@ -17,9 +17,7 @@ We'll only need the most basic structure with an image input.
 -->
 <div id="myContainer">
     <!-- Image Input container -->
-    <div class="raffaello-imageContainer" style="width:400px; height 400px">
-        <img class="raffaello-cropperContainer">
-    </div>
+    <div class="raffaello-imageInput" style="width:400px; height 400px"></div>
 
     <!-- Preview image and Download -->
     <img class="js-previewImage" src="path/to/initial/preview.png">

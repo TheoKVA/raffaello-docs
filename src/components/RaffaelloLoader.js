@@ -8,7 +8,7 @@
 
 import { useEffect } from 'react';
 
-const VERSION = '1.2.1'
+const VERSION = '1.3.1'
 
 export default function RaffaelloLoader({ license = 'MXunPm' }) {
     useEffect(() => {

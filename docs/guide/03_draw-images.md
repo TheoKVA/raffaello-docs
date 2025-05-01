@@ -28,6 +28,4 @@ Coming soon.
 
 ### Imgage Filters
 
-### Restart
-
 ### Watermarks

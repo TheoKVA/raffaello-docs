@@ -22,13 +22,13 @@ Just reference the main files in the `<head>` section of you HTML page:
 
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/raffaello@1.2.0/dist/raffaello.min.js" data-license="abc123"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/raffaello@1.2.0/dist/raffaello.min.css">
+<script src="https://cdn.jsdelivr.net/npm/raffaello@1.3.1/dist/raffaello.min.js" data-license="abc123"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/raffaello@1.3.1/dist/raffaello.min.css">
 ```
 
 :::tip[✅ Current version]
 
-Current running version is <b>1.2.0</b>. We recommend using the latest for up to date performances.
+Current running version is <b>1.3.1</b>. We recommend using the latest for up to date performances.
 
 :::
 
