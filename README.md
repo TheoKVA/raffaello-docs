@@ -1,5 +1,9 @@
 # RAFFAELLO.js 🦦
 
+![Project Status](https://img.shields.io/badge/status-active-brightgreen)
+[![View on GitHub Pages](https://img.shields.io/badge/Check%20it%20-docs-blue)](https://TheoKVA.github.io/raffaello-docs/)
+[![Made with Love in Switzerland](https://img.shields.io/badge/Made%20with%20%E2%9D%A4%EF%B8%8F-Switzerland-red.svg)](https://github.com/TheoKVA/)
+
 > ⚠️ This project is under proprietary license. Source code is not publicly available. This repository is for documentation, usage examples, bug reports, feature requests, and general discussion.
 
 **RAFFAELLO.js** is a high-performance JavaScript library for real-time, browser-based image generation. Developed at [RTS - Radio Television Suisse](https://www.rts.ch/), it empowers designers, editors, and developers to create stunning visual content directly in the browser — no servers, no rendering queues, no fuss.
