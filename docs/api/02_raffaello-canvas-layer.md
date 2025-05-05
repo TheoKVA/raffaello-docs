@@ -1,6 +1,7 @@
 # Raffaello_CanvasLayer
 
 import CodeBlock from '@theme/CodeBlock';
+import APITable from '@site/src/components/APITable';
 
 Main element to draw on a **`Raffaello_Canvas`**. They should only be called via `Raffaello_Canvas.addLayer()` methods. This will ensure each layers are added accordingly to the `Raffaello_Canvas.layers` array.
 
@@ -35,8 +36,6 @@ Main element to draw on a **`Raffaello_Canvas`**. They should only be called via
 }`}
 </CodeBlock>
 
-Calling a new **`Raffaello_CanvasLayer`** is like creating a new `canvas` on which you will pass all the drawing instructions using the method `draw()`.
-
 ## Initiated Properties
 
 | Property | Type | Description | 
@@ -50,15 +49,13 @@ Calling a new **`Raffaello_CanvasLayer`** is like creating a new `canvas` on whi
 
 ### draw()
 
-Introduction.
+Method to pass the drawing instructions to the `Raffaello_Canvas.addLayer()`.
 
-```javascript
+```javascript title="Usage"
 this.canvas.addLayer().draw(function() {
     // Layer drawing instructions
 });
 ```
-
-Description
 
 **Parameters:**
 
@@ -66,9 +63,9 @@ Description
 .addLayer(function)
 ```
 
-| Name | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| *unamed*  | `function` | *`{}`* | The drawing instructions for the layer |
+| Name | Required | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| *unamed*  | ✅ | `function` | *`{}`* | The drawing instructions for the layer. |
 
 **Returns:** 
 
@@ -78,49 +75,49 @@ Description
 
 ### drawText()
 
-Introduction
+Method to draw text content upon a `Raffaello_Canvas.addLayer()`.
 
-<CodeBlock className="small-code" language="javascript" title='Extended version'>
+<CodeBlock className="small-code" language="javascript" title='Usage (Extended)'>
 {`this.drawText({
     text: thisTemplate.container.querySelector('.js-textInput').value,
     fontFamily: 'RTSNeue-Medium',
     fontSize: 30,
-    fontLineHeight: 34,
-    fontKerningOptical: true, // (Optional) Default to false
-    fontLetterSpacing: 0,  // (Optional) Default to 0 // (in prct)
-    fontFillColor: 'white',
-    textAlign: { // Optional
-        horizontal: 'left', // Default to 'left' // 'left' | 'center' | 'right'
-        vertical: 'bottom', // Default to 'bottom' // 'top' | 'center' | 'bottom'
+    fontLineHeight: 34,       // (Optional) Default 'fontSize' value
+    fontKerningOptical: true, // (Optional) Default false
+    fontLetterSpacing: 0,     // (Optional) Default 0 // (in prct)
+    fontFillColor: 'white',   // (Optional) Default 'white'
+    textAlign: {              // (Optional)
+        horizontal: 'left',   // Default 'left' // 'left' | 'center' | 'right'
+        vertical: 'bottom',   // Default 'bottom' // 'top' | 'center' | 'bottom'
     },
-    textBaseline: 'hanging', // (Optional) Default to 'alphabetic'
-    anchorPoint: 'true', // (Optional) Default to 'none' // 'none' | 'true' | 'L'
+    textBaseline: 'hanging',  // (Optional) Default 'alphabetic'
+    anchorPoint: 'true',      // (Optional) Default 'none' // 'none' | 'true' | 'L'
     position: {
         x: 40,
         y: 1090,
-        maxWidth: 0, // (Optional) Default to '0' // '0' means no limit
-        maxWidthRescale: false, // (Optional) Default to false // false (means line break) | true (means rescale)
-        maxLines: 0, // (Optional) Default to '0' // '0' means no limit
-        ignoreEmptyLines: true, // (Optional) Default to true
-        ignoreDoubleSpaces: true, // (Optional) Default to true
+        maxWidth: 0,              // (Optional) Default '0' // '0' means no limit
+        maxWidthRescale: false,   // (Optional) Default false // false (means line break) | true (means rescale)
+        maxLines: 0,              // (Optional) Default '0' // '0' means no limit
+        ignoreEmptyLines: true,   // (Optional) Default true
+        ignoreDoubleSpaces: true, // (Optional) Default true
     },
-    bounds: [ true, false ], // (Optional) Default to [ true, true ] // [ include ascent?, include descent? ]
-    highlight: { // (Optional) Change style of text between '§'
+    bounds: [ true, false ],      // (Optional) Default [ true, true ] // [ include ascent?, include descent? ]
+    highlight: {                  // (Optional) Change style of text between '§'
         fontFamily: 'RTSNeueACTU-ExtraLight',
         fontSize: 30,
         fontLetterSpacing: 0,
         fontFillColor: 'white',
     },
-    background: 'red', // (Optional)
-    background: { // (Optional)
-        color: 'red', // (Optional) Default to 'red'
-        stroke: { // (Optional) 
-            style: "middle", // Default to 'middle' // 'middle' | 'inside' | 'outside'
-            color: 'red', // Default to 'red'
+    background: 'red',        // (Optional)
+    background: {             // (Optional)
+        color: 'red',         // (Optional) Default 'red'
+        stroke: {             // (Optional) 
+            style: "middle",  // Default 'middle' // 'middle' | 'inside' | 'outside'
+            color: 'red',     // Default 'red'
             width: 0,
         },
-        cornerRadius: 0, // (Optional) Default to 0
-        margins: { // (Optional)
+        cornerRadius: 0,      // (Optional) Default 0
+        margins: {            // (Optional)
             top: 0,
             bottom: 0,
             right: 0,
@@ -133,17 +130,66 @@ Introduction
 );`}
 </CodeBlock>
 
-Description
-
 **Parameters:**
 
 ```javascript
-.addLayer(function)
+.drawText(config)
 ```
 
-| Name | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| *unamed*  | `function` | *`{}`* | The drawing instructions for the layer |
+```mdx-code-block
+<APITable>
+```
+
+| Name | Required | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `text` | ✅ | HTMLElement / text | *`null`* | ... |
+| `fontFamily` | ✅ | string | *`null`* | ... |
+| `fontSize` | ✅ | number | *`null`* | ... |
+| `fontLineHeight` | ❌ | number | `fontSize` value | ... |
+| `fontKerningOptical` | ❌ | boolean | `false` | ... |
+| `fontLetterSpacing` | ❌ | number | `0` | (in prct) |
+| `fontFillColor` | ❌ | CSS color | `white` | ... |
+| `textAlign.horizontal` | ❌ | string | `left` | 'left' \| 'center' \| 'right' |
+| `textAlign.vertical` | ❌ | string | `bottom` | 'top' \| 'center' \| 'bottom' |
+| `textBaseline` | ❌ | string | `alphabetic` | ... |
+| `anchorPoint` | ❌ | string | `true` | 'none' \| 'true' \| 'L' |
+| `position.x` | ✅ | number | *`null`* | ... |
+| `position.y` | ✅ | number | *`null`* | ... |
+| `position.maxWidth` | ❌ | number | `0` | In pixels, '0' means no limit |
+| `position.maxWidthRescale` | ❌ | boolean | `false` | `false` means line break \| `true` means rescale |
+| `position.maxLines` | ❌ | number | `0` | '0' means no limit |
+| `position.ignoreEmptyLines` | ❌ | boolean | `true` | ... |
+| `position.ignoreDoubleSpaces` | ❌ | boolean | `true` | ... |
+| `bounds` | ❌ | array | `[ true, true ]` | \[ include ascent?, include descent? \] |
+
+```mdx-code-block
+</APITable>
+```
+
+```
+highlight: {                  // (Optional) Change style of text between '§'
+    fontFamily: 'RTSNeueACTU-ExtraLight',
+    fontSize: 30,
+    fontLetterSpacing: 0,
+    fontFillColor: 'white',
+},
+background: 'red',        // (Optional)
+background: {             // (Optional)
+    color: 'red',         // (Optional) Default 'red'
+    stroke: {             // (Optional) 
+        style: "middle",  // Default 'middle' // 'middle' | 'inside' | 'outside'
+        color: 'red',     // Default 'red'
+        width: 0,
+    },
+    cornerRadius: 0,      // (Optional) Default 0
+    margins: {            // (Optional)
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+    },
+},
+```
 
 **Returns:** 
 
@@ -168,16 +214,16 @@ Description
 
 ```javascript
 this.drawRect({
-    x: 0,            // default 0
-    y: 0,            // default 0
-    width: 100,      // default canvas.width
-    height: 100,     // default canvas.height
-    color: "black", // (Optional) default 'black'
-    cornerRadius: 0, // (Optional) default 0 // 5 || [5] | [5, 5] | [5, 10, 5, 10]
+    x: 0,            // Default 0
+    y: 0,            // Default 0
+    width: 100,      // Default 'this.canvas.width'
+    height: 100,     // Default 'this.canvas.height'
+    color: "black",  // (Optional) Default 'black'
+    cornerRadius: 0, // (Optional) Default 0 // 5 || [5] | [5, 5] | [5, 10, 5, 10]
     stroke: {
-        style: "middle", // (Optional) default 'middle' // 'inside' | 'outside' | 'middle'
-        width: 0,  // (Optional) default 0
-        color: "black", // (Optional) default 'black'
+        style: "middle", // (Optional) Default 'middle' // 'inside' | 'outside' | 'middle'
+        width: 0,    // (Optional) Default 0
+        color: "black", // (Optional) Default 'black'
     },
 });
 ```
@@ -203,7 +249,7 @@ this.drawGradient({
     y: 10,
     width: 90,
     height: 80,
-    direction: 'UP', // 'UP', 'RIGHT', 'DOWN', 'LEFT'
+    direction: 'UP', // 'UP' | 'RIGHT' | 'DOWN' | 'LEFT'
     gradient: [
         [0.0, `rgba(0,0,0, 0)`], // Start
         [1.0, `rgba(0,0,0, 0.8)`], // End
