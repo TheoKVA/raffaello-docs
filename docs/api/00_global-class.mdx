@@ -2,7 +2,7 @@
 
 import CodeBlock from '@theme/CodeBlock';
 
-**RAFFAELLO** is a class object based library. The idea is that for every RAFFAELLO template in your page you have to declare an **unnamed class instantiated inline**. This class shoud only holds a `constructor()` and a method `initiateDrawing()`.
+**RAFFAELLO** is a class object based library. The idea is that for every RAFFAELLO template in your page you have to declare an **unnamed class instantiated inline**. This class shoud only holds a **`constructor()`** and a method **`templateInstructions()`**.
 
 ```javascript
 new class {
@@ -18,7 +18,13 @@ new class {
 This class will be the rendering unit for a signle Raffaello-based canvas. You can have as many unnamed class as you like in a page.
 Each one will encapsulate all the necessary setup and rendering logic inside a single object, enabling modular, clean, and reusable rendering flows.
 
-This class pattern encourages a clear separation of responsibilities:
+:::info[Method Names]
+
+The **`constructor()`** and the method **`templateInstructions()`** are required and follow this strict naming conventions, as a lot of inner functions rely on these names.
+
+:::
+
+This class pattern between constructor and explicitely named method encourages a clear separation of phases within templates:
 
 | Phase | Purpose |
 | :--- | :--- |
@@ -27,7 +33,7 @@ This class pattern encourages a clear separation of responsibilities:
 
 ## constructor()
 
-Within the constructor, you initialize all the element for the template.
+Within the `constructor()`, you initialize all the element for the template. The canvas, the inputs and the users interactions.
 
 <CodeBlock className="small-code" language="javascript" title='Usage exemple'>
 {`new class {
@@ -68,7 +74,9 @@ This methods will hold all the instructions to create the templated image. It sh
 
 <CodeBlock className="small-code" language="javascript" title='Usage exemple'>
 {`new class {
-    constructor() { ... }
+    constructor() { 
+        this.canvas = new Raffaello_Canvas({ ... });
+    }
 
     templateInstructions() {
         // Capture the context of the template
@@ -89,4 +97,34 @@ This methods will hold all the instructions to create the templated image. It sh
 }`}
 </CodeBlock>
 
+:::tip[why use `const thisTemplate = this`]
 
+When you call `.addLayer().draw(function() { ... })`, the `this` keyword **no longer refers to your global class instance** — it now refers to the internal layer drawing context.
+
+To still access your outer class (e.g. to call `this.container`, `this.inputImage`, or `this.canvas`), you must store it beforehand with `const thisTemplate = this;`.
+
+This allows you to access properties from your outer class within the `draw()` function, like:
+
+```javascript
+new class {
+    constructor() { 
+        // highlight-next-line
+        this.container = ... // <- 🎯 What you want to access   
+    }
+
+    templateInstructions() {
+        // Capture the context of the template
+        const thisTemplate = this;
+
+        this.canvas.addLayer().draw(function() {
+            // highlight-next-line
+            this.container.querySelector(...) // ❌ Will FAILL
+
+            // highlight-next-line
+            thisTemplate.container.querySelector(...) // ✅ Will SUCCESS
+        });
+    }
+}
+```
+
+:::

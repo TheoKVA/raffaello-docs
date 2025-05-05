@@ -1,58 +1,125 @@
 # Raffaello_CanvasLayer
 
-Coming soon.
+import CodeBlock from '@theme/CodeBlock';
 
-## Methods
+Main element to draw on a **`Raffaello_Canvas`**. They should only be called via `Raffaello_Canvas.addLayer()` methods. This will ensure each layers are added accordingly to the `Raffaello_Canvas.layers` array.
+
+`Raffaello_Canvas` should typically be initiated with `.addLayer()` methods within the **`templateInstructions()`** function of the **global class**.
+
+<CodeBlock className="small-code" language="javascript" title='Usage exemple'>
+{`new class {
+    constructor() { 
+        this.canvas = new Raffaello_Canvas({ ... });
+    }
+
+    templateInstructions() {
+        // Capture the context of the template
+        const thisTemplate = this;
+
+        // LAYER 0
+        // highlight-start
+        this.canvas.addLayer().draw(function() {
+            ... 
+        });
+        // highlight-end
+
+        // LAYER 1
+        // highlight-start
+        this.canvas.addLayer().draw(function() {
+            ... 
+        });
+        // highlight-end
+
+        // ETC.
+    }
+}`}
+</CodeBlock>
+
+Calling a new **`Raffaello_CanvasLayer`** is like creating a new `canvas` on which you will pass all the drawing instructions using the method `draw()`.
+
+## Initiated Properties
+
+| Property | Type | Description | 
+| :--- | :--- | :--- |
+| `this.canvas` | ... | ... |
+| `this.context` | ... | ... |
+
+
+## Public Methods
+
 
 ### draw()
+
+Introduction.
+
 ```javascript
 this.canvas.addLayer().draw(function() {
-    // drawing instructions
+    // Layer drawing instructions
 });
 ```
 
-### drawText()
+Description
+
+**Parameters:**
 
 ```javascript
-this.drawText({
+.addLayer(function)
+```
+
+| Name | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| *unamed*  | `function` | *`{}`* | The drawing instructions for the layer |
+
+**Returns:** 
+
+`void` — This method performs a side effect (add the drawing instructions to the layer). It does not return any value.
+
+---
+
+### drawText()
+
+Introduction
+
+<CodeBlock className="small-code" language="javascript" title='Extended version'>
+{`this.drawText({
     text: thisTemplate.container.querySelector('.js-textInput').value,
     fontFamily: 'RTSNeue-Medium',
     fontSize: 30,
     fontLineHeight: 34,
-    fontKerningOptical: true, // default false - (Optional)
-    fontLetterSpacing: 0,  // default 0 - (in prct) - (Optional)
+    fontKerningOptical: true, // (Optional) Default to false
+    fontLetterSpacing: 0,  // (Optional) Default to 0 // (in prct)
     fontFillColor: 'white',
-    textAlign: { // (Optional)
-        horizontal: 'left', // default left - left / center / right
-        vertical: 'bottom', // default bottom - top / center / bottom
+    textAlign: { // Optional
+        horizontal: 'left', // Default to 'left' // 'left' | 'center' | 'right'
+        vertical: 'bottom', // Default to 'bottom' // 'top' | 'center' | 'bottom'
     },
-    textBaseline: 'hanging', // default 'alphabetic' (Optional)
-    anchorPoint: 'true', // default none - none / true / L - (Optional)
+    textBaseline: 'hanging', // (Optional) Default to 'alphabetic'
+    anchorPoint: 'true', // (Optional) Default to 'none' // 'none' | 'true' | 'L'
     position: {
         x: 40,
         y: 1090,
-        maxWidth: 0, // default 0 - 0 > no limit - (Optional)
-        maxWidthRescale: false, // default false - false: line break | true: rescale - (Optional)
-        maxLines: 0, // default 0 - 0 > no limit - (Optional)
-        ignoreEmptyLines: true, // default true - (Optional)
-        ignoreDoubleSpaces: true, // default true - (Optional)
+        maxWidth: 0, // (Optional) Default to '0' // '0' means no limit
+        maxWidthRescale: false, // (Optional) Default to false // false (means line break) | true (means rescale)
+        maxLines: 0, // (Optional) Default to '0' // '0' means no limit
+        ignoreEmptyLines: true, // (Optional) Default to true
+        ignoreDoubleSpaces: true, // (Optional) Default to true
     },
-    bounds: [ true, false ], // default  [ true, true ] - include_ascent?, include_descent? - (Optional)
-    highlight: { // Change le style entre de '§' - (Optional)
+    bounds: [ true, false ], // (Optional) Default to [ true, true ] // [ include ascent?, include descent? ]
+    highlight: { // (Optional) Change style of text between '§'
         fontFamily: 'RTSNeueACTU-ExtraLight',
         fontSize: 30,
         fontLetterSpacing: 0,
         fontFillColor: 'white',
     },
-    background: 'red', // - (Optional)
-    background: { // - (Optional)
-        color: 'red', // (Optional) default to 'red'
-        stroke: {
-            style: "middle", // (Optional) default 'middle' // 'middle' | 'inside' | 'outside'
-            color: 'red', // (Optional) default to 'red'
-            width: 0, // (Optional) default to 0
+    background: 'red', // (Optional)
+    background: { // (Optional)
+        color: 'red', // (Optional) Default to 'red'
+        stroke: { // (Optional) 
+            style: "middle", // Default to 'middle' // 'middle' | 'inside' | 'outside'
+            color: 'red', // Default to 'red'
+            width: 0,
         },
-        cornerRadius: 0, // (Optional) default to 0
+        cornerRadius: 0, // (Optional) Default to 0
         margins: { // (Optional)
             top: 0,
             bottom: 0,
@@ -63,8 +130,26 @@ this.drawText({
 });
     this.applyFilter(
     'drop-shadow(0px 0px 60px rgb(0 0 0 / 70%))'
-);
+);`}
+</CodeBlock>
+
+Description
+
+**Parameters:**
+
+```javascript
+.addLayer(function)
 ```
+
+| Name | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| *unamed*  | `function` | *`{}`* | The drawing instructions for the layer |
+
+**Returns:** 
+
+`void` — This method performs a side effect (draw text on the canvas). It does not return any value.
+
+---
 
 ### drawImage()
 
