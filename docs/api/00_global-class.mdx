@@ -71,7 +71,6 @@ This methods will hold all the instructions to create the templated image. It sh
 
 **Typical Usage**
 
-
 <CodeBlock className="small-code" language="javascript" title='Usage exemple'>
 {`new class {
     constructor() { 
@@ -121,7 +120,7 @@ new class {
             this.container.querySelector(...) // ❌ Will FAILL
 
             // highlight-next-line
-            thisTemplate.container.querySelector(...) // ✅ Will SUCCESS
+            thisTemplate.container.querySelector(...) // ✅ Will SUCCEED
         });
     }
 }
