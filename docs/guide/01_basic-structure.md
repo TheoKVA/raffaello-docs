@@ -113,7 +113,7 @@ new class {
         });
 
         // Image input (optionnal)
-        this.inputImage = new Raffaello_ImageCropper( this.container, {
+        this.inputImage = new Raffaello_ImageCropper({
             // ...
         });
 
@@ -129,6 +129,7 @@ new class {
         this.canvas.addLayer().draw(function() {
             // Draw something
         });
+
         // LAYER 1
         this.canvas.addLayer().draw(function() {
             // Draw something
