@@ -19,7 +19,7 @@ import TemplateIntro from '@site/src/components/template-intro';
 
 Welcome to the documentation of <b>RAFFAELLO.js</b> !
 
-- 🤩 **RAFFAELLO.js** is a high-performance JavaScript library for real-time, browser-based image generation. Developed at [RTS - Radio Television Suisse](https://www.rts.ch/) Swiss-French national broadcast company, it empowers designers, editors, and developers to create stunning visual content directly in the browser — no servers, no rendering queues, no fuss.
+- 🤩 **RAFFAELLO.js** is a high-performance JavaScript library for real-time, browser-based image generation. Developed at [RTS - Radio Television Suisse](https://www.rts.ch/) Swiss-French national broadcast company, it empowers designers, editors, and developers to create stunning visual content directly in the browser, no servers, no rendering queues, no fuss.
 
 - 📄 This documentation will cover the integration and usage of RAFFAELLO.js. From typical web application, focusing on specific use cases that demonstrates its features, to more niche solutions to enpower the users with unique abilities.
 
@@ -31,15 +31,15 @@ Understand RAFFAELLO in 30 seconds by playing!
 
 Here is a typical exemple of a RAFFAELLO.js integration. A predefined template with an `image input` and custom `text input` integration. 
 
-- Upload any image. You can then adjust it 🙆‍♀️.
-- Then change the text and the title. Pay attention on how the title interact with the text and the blue strap 👀. 
-- Finnaly download back your newlly created image 👌.
+- Upload any image. Then adjust it 🙆‍♀️.
+- Change the text and the title. Pay attention on how the title interact with the text and the blue strap 👀. 
+- Download your newlly created image 👌.
 
 <TemplateIntro />
 
 :::note[Key elements 🤔]
 
-Making a template like this with any other software would be quite difficult.
+Making a template like this with any design software (Photoshop, figma, etc) would be quite difficult.
 - The **Auto-scale** of the text, as it reaches a certain width.
 - The **Position-link** between all the elements. Here the heigth of the text will determine the position of the title. This simple feature in itself can open a wide range of possibilities.
 
@@ -53,7 +53,7 @@ The same core principle can be applied whether you're generating:
 - 📺 Key elements for broadcast
 - ➕ And more…
 
-RAFFAELLO.js gives total control over the creative output — instantly, from anywhere, on any device, at scale, and without relying on backend infrastructure.
+RAFFAELLO.js gives total control over the creative output, instantly, from anywhere, on any device, at scale, and without relying on backend infrastructure.
 
 
 ## Technology
@@ -79,12 +79,12 @@ The main addon of RAFFAELLO is that it mimics the way most design software works
 ```
 This layer architecture has multiple advantages:
 - `Effects` can be added indivudually on the layers and not blogbally.
-- Drawing elements, like `Text`, on a layer add dynamic `bound` properties to this layers, wich can be used to draw on another layer using `this.canvas.layers[x].bounds.minX` for exemple.
-- It prevent the need to redraw all the canvas, just to update one layer part.
+- Drawing elements, like `Text` on a layer, adds dynamic `bound` properties to this layers, wich can be used to draw on another layer using `this.canvas.layers[x].bounds.minX` for exemple.
+- It prevent the need to redraw all the canvas, just to update one layer.
 
 ## Features
 
-- 🧩 **Simplified inputs**: RAFFAELLO streamlines the image creation process by offering a simple set of inputs. Users fill in text content, adjust text fields, and upload images for seamless integration into the final design.
+- 🧩 **Simplified inputs**: RAFFAELLO streamlines the image creation process by offering a simple set of inputs. Users adjust text fields, simple inputs and upload images for seamless integration into the final design.
 
 - 🖱️ **Intuitive UI**: Designed with simplicity in mind, it offers an intuitive UI that makes image creation effortless. With streamlined workflows and user-friendly controls, making visuals is a breeze for users of all skill levels.
 
@@ -100,4 +100,4 @@ This layer architecture has multiple advantages:
 
 ## Something missing?
 
-If you find issues with the documentation or have suggestions on how to improve the documentation or the project in general, please [file an issue](https://github.com/TheoKVA/raffaello-docs/issues) ! 🚀
+If you find issues with the documentation or have suggestions on how to improve the documentation or the project in general, please [file an issue](https://github.com/TheoKVA/raffaello-docs/issues)! 🚀
