@@ -45,20 +45,19 @@ new class {
         });
 
         // Image input
-        this.inputImage = new Raffaello_ImageCropper( this.container, {
+        this.inputImage = new Raffaello_ImageCropper({
             width: 1920/2, // half
             height: 1080,
             layerIndex: 0,
             layerRef: this,
         });
 
-        // Download interraction
+        // Download trigger
         this.container.querySelector('.js-downloadButton').addEventListener('click', () => this.canvas.downloadImage());
     }
 
-    // Drawing instructions
-    initiateDrawing() {
-        this.canvas.resetLayers();
+    templateInstructions() {
+        // Capture the context of the template
         const thisTemplate = this;
 
         // LAYER 0 // IMAGE INPUT
@@ -77,8 +76,6 @@ new class {
                 color: "rgb(187, 54, 54)",
             });
         });
-
-        this.canvas.renderPreview();
     }
 }
 </script>
@@ -124,9 +121,8 @@ new class {
         this.container.querySelector('.js-downloadButton').addEventListener('click', () => this.canvas.downloadImage());
     }
 
-    // Drawing instructions
-    initiateDrawing() {
-        this.canvas.resetLayers();
+    templateInstructions() {
+        // Capture the context of the template
         const thisTemplate = this;
 
         // LAYER 0
@@ -137,8 +133,6 @@ new class {
         this.canvas.addLayer().draw(function() {
             // Draw something
         });
-
-        this.canvas.renderPreview();
     }
 }
 ```
@@ -148,18 +142,15 @@ In this newly created `class`, you have to declare within the `contructor` the k
 - a `'this.canvas = new Raffaello_Canvas({...})'` which is the main canvas that will get rendered
 - the interractions needed, like a `'this.inputImage'`.
 
-Then you have to declare a function `initiateDrawing()` in which you will make all the drawing instructions.
+Then you have to declare a function `templateInstructions()` in which you will make all the drawing instructions.
 All the successive layers have to be called separately, in the right order. See [layer ordering](#to-do).
 
-The `initiateDrawing()` function allways follow this structure
+The `templateInstructions()` function allways follow this structure
 
 ```javascript
-initiateDrawing() {
-    this.canvas.resetLayers(); // To start by empting all the layers
+templateInstructions() {
     const thisTemplate = this; // To reference the template's scope within a draw()
 
     // All the layers draw()
-
-    this.canvas.renderPreview(); // To make the render
 }
 ```
