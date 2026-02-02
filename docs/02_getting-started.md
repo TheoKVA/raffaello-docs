@@ -18,7 +18,7 @@ RAFFAELLO has 2 main files, `raffaello.min.js` and `raffaello.min.css`.
 
 ## How to use RAFFAELLO
 
-Just reference the main files in the `<head>` section of you HTML page:
+Reference the main files in the `<head>` section of you HTML page:
 
 
 ```html
@@ -35,9 +35,11 @@ Current running version is <b>1.4.0</b>. We recommend using the latest for up to
 
 ## Dependencies
 
-**RAFFAELLO.js** has a depedency to the amazing [cropper.js](https://github.com/fengyuanchen/cropperjs/), a custom library by **Fengyuan Chen**. This library makes for the input images to be able to crop them.
+**RAFFAELLO.js** has a two depedencies:
+- [cropper.js](https://github.com/fengyuanchen/cropperjs/), a custom library by **Fengyuan Chen**. This library builds the UI to allow the user to crop the input images.
+- [mediabunny](https://github.com/Vanilagy/mediabunny), a library by **Vanilagy**. This library is used to read / encode mp4 videos, to allow using video as inputs in RAFFAELLO.
 
-The dependency is already bundled within the `.min.js` and `.min.css` files.
+The dependencies are already bundled within the `.min.js` and `.min.css` files.
 
 
 ## Basic usage
