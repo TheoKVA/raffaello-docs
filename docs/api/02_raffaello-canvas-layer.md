@@ -390,7 +390,7 @@ drawGradient(config)
 | `y`           | ❌       | number           | `0`                       | Y coordinate of the top-left corner of the gradient area. |
 | `width`       | ❌       | number           | `100`                     | Width of the gradient rectangle. |
 | `height`      | ❌       | number           | `100`                     | Height of the gradient rectangle. |
-| `angle`       | ❌       | number (degrees) | `0`                       | Angle of the gradient in degrees, clockwise. `0` means vertical (top to bottom), `90` is right to letf, `180` is bottom to top, etc. |
+| `angle`       | ❌       | number (degrees) | `0`                       | Direction of the gradient in degrees, clockwise. `0` is bottom to top, `90` is left to right, `180` is top to bottom, etc. |
 | `gradient`    | ❌       | array            | `[[0, 'black'], [1, 'black']]` | Array of gradient stops: each stop is a tuple `[offset, color]`, where offset is between `0.0` and `1.0`. |
 
 
