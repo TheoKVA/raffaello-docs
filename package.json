@@ -16,8 +16,8 @@
   "scripts-info": {
     "start": "Run dev server at http://localhost:3000, using the .md files in docs/",
     "build": "Build a static site (html, css, js) into /build folder",
-    "serve": "Serve the generated /build static site localy",
-    "deploy": "(GIT_USER=TheoKVA npm run deploy) Deploy the generated /build site to GitHub Pages (requires GIT_USER and token or SSH)"
+    "serve": "(Optional) Serve the generated /build static site localy",
+    "deploy": "Use 'GIT_USER=TheoKVA npm run deploy' - Deploy the generated /build site to GitHub Pages (requires GIT_USER and token or SSH)"
   },
   "dependencies": {
     "@docusaurus/core": "3.7.0",
