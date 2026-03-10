@@ -46,7 +46,6 @@ The instance must be called **`this.canvas`** within the **`constructor()`** of 
 ```mdx-code-block
 <APITable>
 ```
-
 | Name | Required | Type | Default | Description | 
 | :--- | :--- | :--- | :--- | :--- |
 | `width` | ✅ | number | `1000` | Width of the canvas (in pixels) |
@@ -58,19 +57,25 @@ The instance must be called **`this.canvas`** within the **`constructor()`** of 
 | `previewQuality` | ❌ | number | `0.8` | ... |
 | `renderQuality` | ❌ | number | `0.96` | ... |
 | `cornerRadius` | ❌ | number | `0` | Defines the corner roundness in pixels. A value of `0` means square corners. Make sure the output is in PNG format to see it. |
-
 ```mdx-code-block
 </APITable>
 ```
 
 ## Initiated Properties
 
+```mdx-code-block
+<APITable>
+```
 | Property | Type | Description | 
 | :--- | :--- | :--- |
-| `this.layers` | Array\<Object\> | An array containing all the `Raffaello_CanvasLayer` objects that will create the final image |
+| `this.canvas` | HTML \<canvas\> | DOM canvas element that will hold the final image. |
+| `this.layers` | Array\<Object\> | An array containing all the `Raffaello_CanvasLayer` objects that will create the final image. |
 | `this.width` | number | The canvas width (in pixels) |
 | `this.height` | number | The canvas height (in pixels) |
-| `this.isDrawn` | boolean | Returns `true` if the canvas has been rendered once |
+| `this.isDrawn` | boolean | Returns `true` if the canvas has been rendered once. |
+```mdx-code-block
+</APITable>
+```
 
 ---
 
@@ -142,8 +147,8 @@ Be mindful of the order in which layers are added on the canvas. Layers are rend
 
 | # | Name | Required | Type | Default | Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | `type`  | ❌ | String | `'normal'` | *Optional* - The layer type. `'normal'` / `'effect'` / `'alpha'` |
-| 2 | `style`  | ❌ | String | *`null`* | *Optional* - The second parameter, when the type is defined `'effect'` |
+| 1 | `type`  | ❌ | String | `'normal'` | The layer type. `'normal'` \| `'effect'` \| `'alpha'` |
+| 2 | `style`  | ❌ | String | *`null`* | The second parameter, when the type is defined `'effect'` |
 
 **Returns:** a new instance of a `Raffaello_CanvasLayer`
 
@@ -153,7 +158,7 @@ The `type` is a parameter that will define the compositing operation to apply wh
 | :--- | :--- |
 | `'normal'` | The **blend style** is equivalent to globalCompositeOperation 'normal'. |
 | `'effect'` | The **blend style** is equivalent to globalCompositeOperation second parameter `style`. It can be any of [globalCompositeOperation properties](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation). |
-| `'alpha'` | The **blend style** is equivalent to globalCompositeOperation 'source-in' to the following drawn layer. |
+| `'alpha'` | The **blend style** is equivalent to globalCompositeOperation 'destination-in' to the following drawn layer. |
 
 
 ---

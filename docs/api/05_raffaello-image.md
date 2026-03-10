@@ -30,7 +30,7 @@ This is the class to .
         this.canvas.addLayer().draw(function() {
             // Simple draw
             // highlight-next-line
-            this.drawImage(thisTemplate.myImage.img, 0, 0);
+            this.drawImage(thisTemplate.myImage);
 
             // Draw with specific size
             // highlight-start
@@ -59,7 +59,7 @@ new class {
         // LAYER X // DRAW IMAGE
         this.canvas.addLayer().draw(function() {
             // highlight-start
-            this.drawImage(myImageAtRoot.img, 0, 0);
+            this.drawImage(myImageAtRoot.img);
             // highlight-end
         });
         
