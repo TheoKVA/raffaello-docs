@@ -263,8 +263,8 @@ This method wraps the canvas rectangle drawing functionality with simplified par
     y: 0,            // Default 0
     width: 100,      // Default 'this.canvas.width'
     height: 100,     // Default 'this.canvas.height'
-    opacity: 1,      // (Optional) Default 1
     color: "black",  // (Optional) Default 'black'
+    opacity: 1,      // (Optional) Default 1
     cornerRadius: 0, // (Optional) Default 0 // 5 || [5] | [5, 5] | [5, 10, 5, 10]
     stroke: {
         style: "middle", // (Optional) Default 'middle' // 'inside' | 'outside' | 'middle'
@@ -292,8 +292,8 @@ drawRect(config)
 | `y`                     | ❌       | number                     | `0`                  | Y coordinate of the top-left corner of the rectangle. |
 | `width`                 | ❌       | number                     | `canvas.width`       | Width of the rectangle in pixels. |
 | `height`                | ❌       | number                     | `canvas.height`      | Height of the rectangle in pixels. |
-| `opacity`| ❌     | number              | `1`         | Opacity of the drawn text (`0` to `1`) |
 | `color`                 | ❌       | CSS color                  | `'black'`            | Fill color of the rectangle. |
+| `opacity`| ❌     | number              | `1`         | Opacity of the drawn rectangle (`0` to `1`) |
 | `cornerRadius`          | ❌       | number \| array            | `0`                  | Border radius in pixels. Can be a single value (`5`), or array: `[5]`, `[5, 5]`, `[5, 10, 5, 10]`. |
 | `stroke.style`          | ❌       | string                     | `'middle'`           | Stroke alignment: `'inside'`, `'outside'`, or `'middle'`. |
 | `stroke.width`          | ❌       | number                     | `0`                  | Stroke width in pixels. |
@@ -303,53 +303,6 @@ drawRect(config)
 </APITable>
 ```
 
-**Returns:** 
-
-`void` — This method performs a side effect (draw on the canvas). It does not return any value.
-
----
-
-### drawStar()
-
-This method draws a star centered on (`x_center`, `y_center`) with alternating inner and outer points.
-
-<CodeBlock className="small-code" language="javascript" title='Usage'>
-{`this.drawStar({
-    x_center: 0,
-    y_center: 0,
-    spikes: 5,
-    color: "red",
-    opacity: 1, // (Optional) Default 1
-    outerRadius: 100,
-    innerRadius: 150,
-})`}
-</CodeBlock>
-
-The number of `spikes` determines how many points the star will have (e.g. `5` = typical star). You can customize the shape with `outerRadius` and `innerRadius` for sharper or rounder stars.
-
-**Parameters:**
-
-```javascript
-drawStar(config)
-```
-
-```mdx-code-block
-<APITable>
-```
-
-| `config` Parameters | Required | Type     | Default   | Description |
-| :-------------- | :------- | :--------| :-------- | :---------- |
-| `x_center`      | ✅       | number   | *`null`*  | X coordinate of the star's center. |
-| `y_center`      | ✅       | number   | *`null`*  | Y coordinate of the star's center. |
-| `spikes`        | ✅       | number   | *`null`*  | Number of spikes (points) the star should have. |
-| `opacity`       | ❌       | number   | `1`        | Opacity of the drawn text (`0` to `1`) |
-| `outerRadius`   | ✅       | number   | *`null`*  | Radius of the outer tips of the star. |
-| `innerRadius`   | ✅       | number   | *`null`*  | Radius of the inner dips between star points. |
-| `color`         | ❌       | CSS color | `'red'`   | Fill color of the star shape. |
-
-```mdx-code-block
-</APITable>
-```
 **Returns:** 
 
 `void` — This method performs a side effect (draw on the canvas). It does not return any value.
@@ -392,12 +345,60 @@ drawGradient(config)
 | :------------ | :------- | :----------------| :-------------------------| :---------- |
 | `x`           | ❌       | number           | `0`                       | X coordinate of the top-left corner of the gradient area. |
 | `y`           | ❌       | number           | `0`                       | Y coordinate of the top-left corner of the gradient area. |
-| `width`       | ❌       | number           | `100`                     | Width of the gradient rectangle. |
-| `height`      | ❌       | number           | `100`                     | Height of the gradient rectangle. |
+| `width`       | ❌       | number           | `canvas.width`            | Width of the gradient rectangle. |
+| `height`      | ❌       | number           | `canvas.height`           | Height of the gradient rectangle. |
 | `angle`       | ❌       | number (degrees) | `0`                       | Direction of the gradient in degrees, clockwise. `0` is bottom to top, `90` is left to right, `180` is top to bottom, etc. |
 | `gradient`    | ❌       | array            | `[[0, 'black'], [1, 'black']]` | Array of gradient stops: each stop is a tuple `[offset, color]`, where offset is between `0.0` and `1.0`. |
-| `opacity`     | ❌       | number   | `1`        | Opacity of the drawn text (`0` to `1`) |
+| `opacity`     | ❌       | number   | `1`        | Opacity of the drawn rectangle (`0` to `1`) |
 
+
+```mdx-code-block
+</APITable>
+```
+**Returns:** 
+
+`void` — This method performs a side effect (draw on the canvas). It does not return any value.
+
+---
+
+
+### drawStar()
+
+This method draws a star centered on (`x_center`, `y_center`) with alternating inner and outer points.
+
+<CodeBlock className="small-code" language="javascript" title='Usage'>
+{`this.drawStar({
+    x_center: 0,
+    y_center: 0,
+    spikes: 5,
+    outerRadius: 100,
+    innerRadius: 150,
+    color: "red",
+    opacity: 1, // (Optional) Default 1
+})`}
+</CodeBlock>
+
+The number of `spikes` determines how many points the star will have (e.g. `5` = typical star). You can customize the shape with `outerRadius` and `innerRadius` for sharper or rounder stars.
+
+**Parameters:**
+
+```javascript
+drawStar(config)
+```
+
+```mdx-code-block
+<APITable>
+```
+
+| `config` Parameters | Required | Type     | Default   | Description |
+| :-------------- | :------- | :--------| :-------- | :---------- |
+| `x_center`  | ✅ | number | *`null`*| X coordinate of the star's center. |
+| `y_center`| ✅ | number | *`null`*| Y coordinate of the star's center. |
+| `spikes`| ✅ | number | *`null`*| Number of spikes (points) the star should have. |
+| `outerRadius` | ✅ | number | *`null`*| Radius of the outer tips of the star. |
+| `innerRadius` | ✅ | number | *`null`*| Radius of the inner dips between star points. |
+| `color` | ❌ | CSS color | `'red'` | Fill color of the star shape. |
+| `opacity` | ❌ | number | `1`| Opacity of the drawn star (`0` to `1`) |
 
 ```mdx-code-block
 </APITable>
@@ -425,9 +426,9 @@ applyFilter(filter)
 ```mdx-code-block
 <APITable>
 ```
-| Parameter     | Required | Type                                           | Default   | Description |
-| :------------ | :------- | :--------------------------------------------- | :-------- | :---------- |
-| `filter`       | ✅       | string                                         | *`null`*  | CSS-like filter string to apply to the canvas (e.g. `'blur(5px) brightness(150%)'`). |
+| # | Name | Required | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | `filter` | ✅  | string | *`null`*  | CSS-like filter string to apply to the canvas (e.g. `'blur(5px) brightness(150%)'`). |
 ```mdx-code-block
 </APITable>
 ```
@@ -457,9 +458,9 @@ prepareFilter(filter)
 ```mdx-code-block
 <APITable>
 ```
-| Parameter     | Required | Type                                           | Default   | Description |
-| :------------ | :------- | :--------------------------------------------- | :-------- | :---------- |
-| `filter`       | ✅       | string                                         | *`null`*  | CSS-like filter string to apply to the canvas (e.g. `'blur(5px) brightness(150%)'`). |
+| # | Name | Required | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | `filter` | ✅  | string | *`null`*  | CSS-like filter string to apply to the canvas (e.g. `'blur(5px) brightness(150%)'`). |
 ```mdx-code-block
 </APITable>
 ```
@@ -472,9 +473,76 @@ prepareFilter(filter)
 
 ### applyLUT()
 
+Apply a LUT (Look-Up Table) filter to the current canvas context. This is a more advanced filter that can be used for color grading and complex effects. The LUT should be provided as an instance of a `Raffaello_LUT`.
+
+<CodeBlock className="small-code" language="javascript" title='Usage'>
+{`// First, create a LUT instance
+const myLUT = new Raffaello_LUT({ ... });
+
+// Then apply the LUT to the canvas
+this.applyLUT(myLUT);`}
+</CodeBlock>
+
+**Parameters:**
+
 ```javascript
-this.applyLUT(...);
+this.applyLUT(lut)
 ```
+
+```mdx-code-block
+<APITable>
+```
+| # | Name | Required | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | `lut`          | ✅       | Raffaello_LUT                                  | *`null`*  | The LUT instance to apply to the canvas. |
+```mdx-code-block
+</APITable>
+```
+
+**Returns:** 
+
+`void` — This method performs a side effect (draw on the canvas). It does not return any value.
+
+
+---
+
+### clear()
+
+Clear the entire canvas, resetting it to a blank state, and resetting the `isDrawn` property to `false`.
+<CodeBlock className="small-code" language="javascript" title='Usage'>
+{`this.clear();`}
+</CodeBlock>
+
+**Parameters:**
+
+*none* - This method does not take any parameters.
+
+**Returns:** 
+
+`void` — This method performs a side effect (draw on the canvas). It does not return any value.
+
+
+---
+
+### shift()
+
+Shift the entire canvas content by a specified amount in the x and y directions. 
+This is useful for adjusting the position of all drawn elements, based on the calculated bounds of the content.
+
+<CodeBlock className="small-code" language="javascript" title='Usage'>
+{`this.shift(10, -20); // Shift canvas content 10px right and 20px up`}
+</CodeBlock>
+
+**Parameters:**
+
+```javascript
+this.shift(x, y);
+```
+
+| # | Name | Required | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | `x`  | ❌ | number | `0`| Amount to shift the canvas content horizontally (positive values shift right, negative values shift left). |
+| 2 | `y`  | ❌ | number | `0` | Amount to shift the canvas content vertically (positive values shift down, negative values shift up). |
 
 **Returns:** 
 

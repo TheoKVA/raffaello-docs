@@ -103,7 +103,7 @@ This methods should typically be called within the **`templateInstructions()`** 
 
         // Draws with 'multiply' blending mode
         // highlight-start
-        this.canvas.addLayer('effect', 'multiply').draw(function() {
+        this.canvas.addLayer('multiply').draw(function() {
             ...
         });
         // highlight-end
@@ -142,13 +142,12 @@ Be mindful of the order in which layers are added on the canvas. Layers are rend
 **Parameters:**
 
 ```javascript
-.addLayer(type = 'normal', style = null)
+.addLayer(type = 'normal')
 ```
 
 | # | Name | Required | Type | Default | Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | `type`  | ❌ | String | `'normal'` | The layer type. `'normal'` \| `'effect'` \| `'alpha'` |
-| 2 | `style`  | ❌ | String | *`null`* | The second parameter, when the type is defined `'effect'` |
+| 1 | `type`  | ❌ | String | `'normal'` | The layer type, or the effect. `'normal'` \| `'alpha'` \| or a knowned CSS effect |
 
 **Returns:** a new instance of a `Raffaello_CanvasLayer`
 
@@ -157,8 +156,8 @@ The `type` is a parameter that will define the compositing operation to apply wh
 | `Type` value | Description  |
 | :--- | :--- |
 | `'normal'` | The **blend style** is equivalent to globalCompositeOperation 'normal'. |
-| `'effect'` | The **blend style** is equivalent to globalCompositeOperation second parameter `style`. It can be any of [globalCompositeOperation properties](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation). |
-| `'alpha'` | The **blend style** is equivalent to globalCompositeOperation 'destination-in' to the following drawn layer. |
+| `'alpha'` | The **blend style** is equivalent to globalCompositeOperation 'alpha-in' to the following drawn layer. |
+| **String** | Any knowned [globalCompositeOperation properties](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation). E.g. `'multiply'`, `'screen'`, etc. |
 
 
 ---
