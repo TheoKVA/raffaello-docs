@@ -156,8 +156,10 @@ The `type` is a parameter that will define the compositing operation to apply wh
 | `Type` value | Description  |
 | :--- | :--- |
 | `'normal'` | The **blend style** is equivalent to globalCompositeOperation 'normal'. |
-| `'alpha'` | The **blend style** is equivalent to globalCompositeOperation 'alpha-in' to the following drawn layer. |
-| **String** | Any knowned [globalCompositeOperation properties](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation). E.g. `'multiply'`, `'screen'`, etc. |
+| `'alpha'` | The current layer opacity is determined by the opacity of the following drawn layer. |
+| `'luminance'` | The current layer opacity is determined by the luminance of the following drawn layer. |
+| **String** | Any knowned [globalCompositeOperation properties](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation). Possible values are `'screen'`, `'overlay'`, `'darken'`, `'lighten'`, `'color-dodge'`, `'color-burn'`, `'hard-light'`, `'soft-light'`, `'difference'`, `'exclusion'`, `'hue'`, `'saturation'`, `'color'`, `'luminosity'`|
+
 
 
 ---
@@ -237,7 +239,7 @@ Triggers a full re-render of all the canvas layers.
 
 ---
 
-### .downloadImage()
+### .download()
 
 Triggers the rendering and download of the current canvas state as an image file.
 
@@ -250,7 +252,7 @@ Triggers the rendering and download of the current canvas state as an image file
 
         // Download logic
         // highlight-next-line
-        this.container.querySelector('.myButton').addEventListener('click', () => this.canvas.downloadImage());
+        this.container.querySelector('.myButton').addEventListener('click', () => this.canvas.download());
     }
     templateInstructions() { ... }
 }`}
@@ -261,7 +263,7 @@ This method finalizes the layers, converts the rendered canvas into an image, an
 **Parameters:**
 
 ```javascript
-.downloadImage()
+.download()
 ```
 
 *None.*

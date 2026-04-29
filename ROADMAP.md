@@ -1,7 +1,7 @@
 # 🛣️ Roadmap
 
 Tagline:
-- Image automation meets creative freedom — right in your browser.
+- Image automation meets creative freedom, right in your browser.
 
 
 ## 🔜 To Do

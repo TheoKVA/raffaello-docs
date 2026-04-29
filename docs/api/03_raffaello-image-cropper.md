@@ -55,7 +55,7 @@ this.inputImage = new Raffaello_ImageCropper({
 <CodeBlock className="small-code" language="javascript" title='Extended version'>
 {`this.inputImage = new Raffaello_ImageCropper({
     layerRef: this,
-    layerIndex: 0,
+    layerIndex: [0, 3],
     width: 1000,       // (Optional) Default this.canvas.width
     height: 1000,      // (Optional) Default this.canvas.height
     watermark: '...'   // (Optional) Watermark url or base 64
@@ -82,7 +82,7 @@ this.inputImage = new Raffaello_ImageCropper({
 | Name | Required | Type | Default | Description | 
 | :--- | :--- | :--- | :--- | :--- |
 | `layerRef` | ✅ | Raffaello_Canvas | *`null`* | The parent canvas reference. This is required to properly initialize the cropper HTML DOM and link it to the canvas. |
-| `layerIndex` | ❌ | number | *`null`* | The index of the layer where the image cropper will be drawn. If this is not defined, use the `makeDrawing()` method to start the drawing sequence. |
+| `layerIndex` | ❌ | number or array | *`null`* | The index of the layer where the image cropper will be drawn. If this is not defined, use the `makeDrawing()` method to start the drawing sequence. either a single number or an array of numbers. |
 | `width` | ✅ | number | *`this.canvas.width`* | The width of the cropper canvas. By default, it takes the width of the main canvas. |
 | `height` | ✅ | number | *`this.canvas.height`* | The height of the cropper canvas. By default, it takes the height of the main canvas. |
 | `watermark` | ❌ | string (URL or base64) | *`null`* | An optional watermark image that will be displayed on top of the cropper. It can be a URL or a base64 string. |

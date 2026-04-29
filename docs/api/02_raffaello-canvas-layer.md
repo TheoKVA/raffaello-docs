@@ -46,6 +46,7 @@ Main elements to draw on a **`Raffaello_Canvas`**. They should only be called vi
 | `this.index` | integer | The current layer index. |
 | `this.canvas` | \<canvas\> | DOM canvas element that will hold all the drawings. |
 | `this.context` | ctx | `this.canvas` 2D rendering context. Initiated with `getContext()`. |
+| `this.ctx` | ctx | alias of `this.context`. |
 | `this.width` | number | The canvas width (in pixels) |
 | `this.height` | number | The canvas height (in pixels) |
 | `this.isDrawn` | boolean | Returns `true` if the canvas has been drawn once. |
@@ -440,7 +441,6 @@ applyFilter(filter)
 
 ---
 
-
 ### prepareFilter()
 
 Prepare a CSS-like filter for the current canvas context. Same as `applyFilter()` but used before drawing.
@@ -461,6 +461,39 @@ prepareFilter(filter)
 | # | Name | Required | Type | Default | Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1 | `filter` | ✅  | string | *`null`*  | CSS-like filter string to apply to the canvas (e.g. `'blur(5px) brightness(150%)'`). |
+```mdx-code-block
+</APITable>
+```
+
+**Returns:** 
+
+`void` — This method performs a side effect (draw on the canvas). It does not return any value.
+
+---
+
+### blur()
+
+Apply a blur filter to the current canvas context. The normal `blur()` filter blur the edges also within the inside of the canvas. This methods allows to apply a blur that does not affect the edges, by keeping them sharp.
+
+<CodeBlock className="small-code" language="javascript" title='Usage'>
+{`
+    this.blur('5px');
+`}
+</CodeBlock>
+
+**Parameters:**
+
+```javascript
+blur(radius, keepEdges = true)
+```
+
+```mdx-code-block
+<APITable>
+```
+| # | Name | Required | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | `radius` | ✅  | number or string | *`null`*  | The radius of the blur effect in pixels. Either a number (e.g., `5`) or a string with pixel units (e.g., `'5px'`). |
+| 2 | `keepEdges` | ❌  | boolean | `true`  | Whether to keep the edges of the canvas when applying the blur. |
 ```mdx-code-block
 </APITable>
 ```
@@ -524,10 +557,10 @@ Clear the entire canvas, resetting it to a blank state, and resetting the `isDra
 
 ---
 
-### shift()
+### move()
 
 Shift the entire canvas content by a specified amount in the x and y directions. 
-This is useful for adjusting the position of all drawn elements, based on the calculated bounds of the content.
+This is useful for adjusting the position of all drawn elements, based on the calculated bounds of the actual content.
 
 <CodeBlock className="small-code" language="javascript" title='Usage'>
 {`this.shift(10, -20); // Shift canvas content 10px right and 20px up`}
@@ -536,13 +569,40 @@ This is useful for adjusting the position of all drawn elements, based on the ca
 **Parameters:**
 
 ```javascript
-this.shift(x, y);
+this.move(x, y);
 ```
 
-| # | Name | Required | Type | Default | Description |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | `x`  | ❌ | number | `0`| Amount to shift the canvas content horizontally (positive values shift right, negative values shift left). |
-| 2 | `y`  | ❌ | number | `0` | Amount to shift the canvas content vertically (positive values shift down, negative values shift up). |
+| # | Name | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | `x` | number | `0`| Amount to shift the canvas content horizontally (positive values shift right, negative values shift left). |
+| 2 | `y` | number | `0` | Amount to shift the canvas content vertically (positive values shift down, negative values shift up). |
+
+**Returns:** 
+
+`void` — This method performs a side effect (draw on the canvas). It does not return any value.
+
+
+---
+
+### rotate()
+
+Rotate the entire canvas content by a specified angle around a given pivot point. 
+
+<CodeBlock className="small-code" language="javascript" title='Usage'>
+{`this.rotate(45, 30, 30); // Rotate canvas content 45 degrees around the point (30, 30)`}
+</CodeBlock>
+
+**Parameters:**
+
+```javascript
+this.rotate(angle, x, y);
+```
+
+| # | Name | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | `angle` | number | `0`| Angle to rotate in degrees. |
+| 2 | `x` | number | `canvas.width / 2`| Coordinate X of the pivot point. |
+| 3 | `y` | number | `canvas.height / 2` | Coordinate Y of the pivot point. |
 
 **Returns:** 
 

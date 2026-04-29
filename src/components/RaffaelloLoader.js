@@ -8,9 +8,9 @@
 
 import { useEffect } from 'react';
 
-const VERSION = '1.3.1'
+const VERSION = '1.7.1'
 
-export default function RaffaelloLoader({ license = 'MXunPm' }) {
+export default function RaffaelloLoader({ license = 'YUjqTwUP2BcsqiBHsldBL00Urt1NZb2o' }) {
     useEffect(() => {
 
         // Load JS if not already present
