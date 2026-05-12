@@ -32,12 +32,16 @@ Current running version is <b>1.7.1</b>. We recommend using the latest for up to
 
 :::
 
+## License
+
+To use RAFFAELLO, you need to acquire a license key. You can get one by contacting us at <a href="mailto:theo.francart@rts.ch">theo.francart@rts.ch</a>.
+
 
 ## Dependencies
 
-**RAFFAELLO.js** has a two depedencies:
-- [cropper.js](https://github.com/fengyuanchen/cropperjs/), a custom library by **Fengyuan Chen**. This library builds the UI to allow the user to crop the input images.
+- [cropper.js (1.x)](https://github.com/fengyuanchen/cropperjs/) ([API](https://fengyuanchen.github.io/cropperjs/v1/)), a custom library by **Fengyuan Chen**. This library builds the UI to allow the user to crop the input images.
 - [mediabunny](https://github.com/Vanilagy/mediabunny), a library by **Vanilagy**. This library is used to read / encode mp4 videos, to allow using video as inputs in RAFFAELLO.
+- [zip.js](https://github.com/gildas-lormeau/zip.js). This library is used to create and manipulate zip files.
 
 The dependencies are already bundled within the `.min.js` and `.min.css` files.
 

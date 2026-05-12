@@ -104,13 +104,9 @@ this.inputImage = new Raffaello_ImageCropper({
 | `this.width` | number | The canvas width (in pixels) |
 | `this.height` | number | The canvas height (in pixels) |
 | `this.isLoaded` | boolean | Returns `true` if the cropper has finished loading the image. |
-| `this.isReady` | boolean | Returns `true` if the cropper is ready to be drawn. |
+| `this.isReady` | boolean | Returns `true` if the cropper image is ready to be drawn. |
 | `this.filter` | string | The current filter string to apply to the cropped image. This is updated in real-time as the user changes the filters inputs. |
 
 ```mdx-code-block
 </APITable>
 ```
-
----
-
-## Public Methods

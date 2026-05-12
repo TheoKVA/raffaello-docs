@@ -43,7 +43,8 @@ Main elements to draw on a **`Raffaello_Canvas`**. They should only be called vi
 ```
 | Property | Type | Description | 
 | :--- | :--- | :--- |
-| `this.index` | integer | The current layer index. |
+| `this.parent` | `Raffaello_Canvas` | The parent object to which the layer belongs. |
+| `this.index` \| `this.idx` | integer | The current layer index. |
 | `this.canvas` | \<canvas\> | DOM canvas element that will hold all the drawings. |
 | `this.context` | ctx | `this.canvas` 2D rendering context. Initiated with `getContext()`. |
 | `this.ctx` | ctx | alias of `this.context`. |
@@ -55,6 +56,7 @@ Main elements to draw on a **`Raffaello_Canvas`**. They should only be called vi
 | `this.bounds.maxX` | number | Outer-left boundary coordinate |
 | `this.bounds.minY` | number | Outer-top boundary coordinate |
 | `this.bounds.maxY` | number | Outer-bottom boundary coordinate |
+| `this.text` | string | If text was drawn onto the layer, this will hold the text. |
 
 ```mdx-code-block
 </APITable>
@@ -81,7 +83,7 @@ this.canvas.addLayer().draw(function() {
 
 | Name | Required | Type | Default | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| *unamed*  | ✅ | `function` | *`{}`* | The drawing instructions for the layer. |
+| *unamed* | ✅ | `function` | *`{}`* | The drawing instructions for the layer. |
 
 **Returns:** 
 
@@ -98,53 +100,51 @@ Method to draw text content upon a `Raffaello_Canvas.addLayer()`.
     text: thisTemplate.container.querySelector('.js-textInput').value,
     fontFamily: 'RTSNeue-Medium',
     fontSize: 30,
-    fontLineHeight: 34,       // (Optional) Default 'fontSize' value
-    fontKerningOptical: true, // (Optional) Default false
-    fontLetterSpacing: 0,     // (Optional) Default 0 // (in prct)
-    fontFillColor: 'white',   // (Optional) Default 'white'
-    textAlign: {              // (Optional)
+    fontLineHeight: 34,       // Default 'fontSize' value
+    fontKerningOptical: true, // Default false
+    fontLetterSpacing: 0,     // Default 0 // (in prct)
+    fontFillColor: 'white',   // Default 'white'
+    textAlign: {
         horizontal: 'left',   // Default 'left' // 'left' | 'center' | 'right'
         vertical: 'bottom',   // Default 'bottom' // 'top' | 'center' | 'bottom'
     },
-    textBaseline: 'hanging',  // (Optional) Default 'alphabetic'
-    anchorPoint: 'true',      // (Optional) Default 'none' // 'none' | 'true' | 'L'
+    textBaseline: 'hanging',  // Default 'alphabetic'
+    anchorPoint: 'true',      // Default 'none' // 'none' | 'true' | 'L'
     position: {
         x: 40,
         y: 1090,
-        maxWidth: 0,              // (Optional) Default '0' // '0' means no limit
-        maxWidthRescale: false,   // (Optional) Default false // 'false' (means line break) | 'true' (means rescale)
-        maxLines: 0,              // (Optional) Default '0' // '0' means no limit
-        ignoreEmptyLines: true,   // (Optional) Default true
-        ignoreDoubleSpaces: true, // (Optional) Default true
+        maxWidth: 0,              // Default 0 // 0 means no limit
+        maxWidthRescale: false,   // Default false // 'false' (means line break) | 'true' (means rescale)
+        maxLines: 0,              // Default 0 // 0 means no limit
+        ignoreEmptyLines: true,   // Default true
+        ignoreDoubleSpaces: true, // Default true
     },
-    opacity: 1,               // (Optional) Default '1'
-    bounds: [ true, false ],  // (Optional) Default [ true, true ] // [ include ascent?, include descent? ]
-    highlight: {              // (Optional) Change style of text between '§' markers
+    opacity: 1,               // Default 1
+    bounds: [ true, false ],  // Default [ true, true ] // [ include ascent?, include descent? ]
+    highlight: {              // (Optional) // Change style of text between '§' markers
         fontFamily: 'RTSNeueACTU-ExtraLight',
         fontSize: 30,
         fontLetterSpacing: 0,
         fontFillColor: 'white',
     },
-    background: 'red',        // (Optional)
-    background: {             // (Optional)
-        color: 'red',         // (Optional) Default 'red'
-        stroke: {             // (Optional) 
+    background: {             // (Optional) // Draw background box behind text
+        color: 'red',         // Default 'red'
+        opacity: 1,           // Default 1
+        stroke: {             
             style: "middle",  // Default 'middle' // 'middle' | 'inside' | 'outside'
             color: 'red',     // Default 'red'
-            width: 0,
+            width: 0,         // Default 0
+            opacity: 1,       // Default 1 // Override background opacity if specified
         },
-        cornerRadius: 0,      // (Optional) Default 0
-        margins: {            // (Optional)
+        cornerRadius: 0,      // Default 0
+        margins: {
             top: 0,
             bottom: 0,
             right: 0,
             left: 0,
         },
     },
-});
-    this.applyFilter(
-    'drop-shadow(0px 0px 60px rgb(0 0 0 / 70%))'
-);`}
+});`}
 </CodeBlock>
 
 **Parameters:**
@@ -156,44 +156,44 @@ Method to draw text content upon a `Raffaello_Canvas.addLayer()`.
 ```mdx-code-block
 <APITable>
 ```
-| `config` Parameters          | Required | Type                 | Default        | Description |
-| :--------------------------- | :------- | :------------------- | :------------- | :---------- |
-| `text`                       | ✅       | HTMLElement / string | *`null`*       | The HTML element or text content to render. |
-| `fontFamily`                 | ✅       | string               | *`null`*       | Font family used to render the text. |
-| `fontSize`                   | ✅       | number               | *`null`*       | Size of the font in pixels. |
-| `fontLineHeight`            | ❌       | number               | `fontSize`     | Line height, defaults to font size. |
-| `fontKerningOptical`        | ❌       | boolean              | `false`        | Enables optical kerning if supported. |
-| `fontLetterSpacing`         | ❌       | number               | `0`            | Letter spacing in percentage (e.g. 0 = default spacing). |
-| `fontFillColor`             | ❌       | CSS color            | `white`        | Fill color of the text. |
-| `textAlign.horizontal`      | ❌       | string               | `left`         | Horizontal alignment: `'left'` \| `'center'` \| `'right'`. |
-| `textAlign.vertical`        | ❌       | string               | `bottom`       | Vertical alignment: `'top'` \| `'center'` \| `'bottom'`. |
-| `textBaseline`              | ❌       | string               | `alphabetic`   | Canvas text baseline alignment (e.g. `'alphabetic'`). |
-| `anchorPoint`               | ❌       | string               | `true`         | Anchor reference: `'none'` \| `'true'` \| `'L'`. |
-| `position`                  | ✅       | object               | *`{}`*         | Object defining position and layout constraints. |
-| `position.x`                | ✅       | number               | *`null`*       | X coordinate of the text position. |
-| `position.y`                | ✅       | number               | *`null`*       | Y coordinate of the text position. |
-| `position.maxWidth`         | ❌       | number               | `0`            | Max width in pixels. `0` means no limit. |
-| `position.maxWidthRescale` | ❌       | boolean              | `false`        | If `true`, text will rescale to fit instead of breaking lines. |
-| `position.maxLines`         | ❌       | number               | `0`            | Max number of lines. `0` means no limit. |
-| `position.ignoreEmptyLines`| ❌       | boolean              | `true`         | Skip empty lines when rendering text. |
-| `position.ignoreDoubleSpaces`| ❌     | boolean              | `true`         | Skip multiple consecutive spaces. |
-| `opacity`| ❌     | number              | `1`         | Opacity of the drawn text (`0` to `1`) |
-| `bounds`                    | ❌       | array                | `[true, true]` | `[ include ascent?, include descent? ]`. |
-| `highlight`                 | ❌       | object               | `undefined`    | Optional styling for text between `§` markers. |
-| `highlight.fontFamily`      | ❌       | string               | Inherits       | Font family for highlighted segments. |
-| `highlight.fontSize`        | ❌       | number               | Inherits       | Font size for highlighted segments. |
-| `highlight.fontLetterSpacing`| ❌      | number               | Inherits       | Letter spacing for highlights. |
-| `highlight.fontFillColor`   | ❌       | CSS color            | Inherits       | Fill color for highlights. |
-| `background`                | ❌       | string / object      | `undefined`    | Background color or configuration object. |
-| `background.color`          | ❌       | CSS color            | `'red'`        | Background fill color. |
-| `background.stroke.style`   | ❌       | string               | `'middle'`     | Stroke placement: `'middle'` \| `'inside'` \| `'outside'`. |
-| `background.stroke.color`   | ❌       | CSS color            | `'red'`        | Stroke color. |
-| `background.stroke.width`   | ❌       | number               | `0`            | Stroke width. |
-| `background.cornerRadius`   | ❌       | number               | `0`            | Corner radius. |
-| `background.margins.top`    | ❌       | number               | `0`            | Top margin. |
-| `background.margins.bottom` | ❌       | number               | `0`            | Bottom margin. |
-| `background.margins.left`   | ❌       | number               | `0`            | Left margin. |
-| `background.margins.right`  | ❌       | number               | `0`            | Right margin. |
+| `config` Parameters | Required | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `text` | ✅ | HTMLElement / string | *`null`* | The HTML element or text content to render. |
+| `fontFamily` | ✅ | string | *`null`* | Font family used to render the text. |
+| `fontSize` | ✅ | number | *`null`* | Size of the font in pixels. |
+| `fontLineHeight` | ❌ | number | `fontSize` | Line height, defaults to font size. |
+| `fontKerningOptical` | ❌ | boolean | `false` | Enables optical kerning if supported. |
+| `fontLetterSpacing` | ❌ | number | `0` | Letter spacing in percentage (e.g. 0 = default spacing). |
+| `fontFillColor`| ❌ | CSS color | `white` | Fill color of the text. |
+| `textAlign.horizontal`| ❌ | string | `left` | Horizontal alignment: `'left'` \| `'center'` \| `'right'`. |
+| `textAlign.vertical` | ❌ | string | `bottom` | Vertical alignment: `'top'` \| `'center'` \| `'bottom'`. |
+| `textBaseline` | ❌ | string | `alphabetic` | Canvas text baseline alignment (e.g. `'alphabetic'`). |
+| `anchorPoint` | ❌ | string | `true` | Anchor reference: `'none'` \| `'true'` \| `'L'`. |
+| `position` | ✅ | object | *`{}`* | Object defining position and layout constraints. |
+| `position.x` | ✅ | number | *`null`* | X coordinate of the text position. |
+| `position.y` | ✅ | number | *`null`* | Y coordinate of the text position. |
+| `position.maxWidth` | ❌ | number | `0` | Max width in pixels. `0` means no limit. |
+| `position.maxWidthRescale` | ❌ | boolean | `false` | If `true`, text will rescale to fit instead of breaking lines. |
+| `position.maxLines` | ❌ | number | `0` | Max number of lines. `0` means no limit. |
+| `position.ignoreEmptyLines`| ❌ | boolean | `true` | Skip empty lines when rendering text. |
+| `position.ignoreDoubleSpaces`| ❌ | boolean | `true` | Skip multiple consecutive spaces. |
+| `opacity`| ❌ | number | `1` | Opacity of the drawn text (`0` to `1`) |
+| `bounds` | ❌ | array | `[true, true]` | `[ include ascent?, include descent? ]`. |
+| `highlight` | ❌ | object | `undefined` | Optional styling for text between `§` markers. |
+| `highlight.fontFamily`| ❌ | string | Inherits | Font family for highlighted segments. |
+| `highlight.fontSize` | ❌ | number | Inherits | Font size for highlighted segments. |
+| `highlight.fontLetterSpacing`| ❌| number | Inherits | Letter spacing for highlights. |
+| `highlight.fontFillColor` | ❌ | CSS color | Inherits | Fill color for highlights. |
+| `background` | ❌ | object| `undefined` | Background configuration object. |
+| `background.color` | ❌ | CSS color | `'red'` | Background fill color. |
+| `background.stroke.style` | ❌ | string | `'middle'` | Stroke placement: `'middle'` \| `'inside'` \| `'outside'`. |
+| `background.stroke.color` | ❌ | CSS color | `'red'` | Stroke color. |
+| `background.stroke.width` | ❌ | number | `0` | Stroke width. |
+| `background.cornerRadius` | ❌ | number | `0` | Corner radius. |
+| `background.margins.top` | ❌ | number | `0` | Top margin. |
+| `background.margins.bottom` | ❌ | number | `0` | Bottom margin. |
+| `background.margins.left` | ❌ | number | `0` | Left margin. |
+| `background.margins.right` | ❌ | number | `0` | Right margin. |
 ```mdx-code-block
 </APITable>
 ```
@@ -233,17 +233,17 @@ drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
 ```mdx-code-block
 <APITable>
 ```
-| Parameter     | Required | Type                                           | Default   | Description |
-| :------------ | :------- | :--------------------------------------------- | :-------- | :---------- |
-| `image`       | ✅       | `Raffaello_ImageCropper` \| `Raffaello_Image` \| `HTMLImageElement` | *`null`*  | The image-like object to draw. |
-| `sx`          | ❌       | number                                         | `0`       | Source X: horizontal coordinate of the top-left corner of the sub-rectangle to draw from the source image. |
-| `sy`          | ❌       | number                                         | `0`       | Source Y: vertical coordinate of the top-left corner of the sub-rectangle to draw. |
-| `sWidth`      | ❌       | number                                         | *image width* | Width of the source sub-rectangle to draw. Defaults to full image width. |
-| `sHeight`     | ❌       | number                                         | *image height* | Height of the source sub-rectangle to draw. Defaults to full image height. |
-| `dx`          | ❌       | number                                         | `0`       | Destination X: horizontal position where to place the image on the canvas. |
-| `dy`          | ❌       | number                                         | `0`       | Destination Y: vertical position on the canvas. |
-| `dWidth`      | ❌       | number                                         | *sWidth*  | Width to draw the image on the canvas. Can scale it. |
-| `dHeight`     | ❌       | number                                         | *sHeight* | Height to draw the image on the canvas. |
+| Parameter | Required | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `image` | ✅ | `Raffaello_ImageCropper` \| `Raffaello_Image` \| `HTMLImageElement` | *`null`* | The image-like object to draw. |
+| `sx` | ❌ | number | `0` | Source X: horizontal coordinate of the top-left corner of the sub-rectangle to draw from the source image. |
+| `sy` | ❌ | number | `0` | Source Y: vertical coordinate of the top-left corner of the sub-rectangle to draw. |
+| `sWidth`| ❌ | number | *image width* | Width of the source sub-rectangle to draw. Defaults to full image width. |
+| `sHeight` | ❌ | number | *image height* | Height of the source sub-rectangle to draw. Defaults to full image height. |
+| `dx` | ❌ | number | `0` | Destination X: horizontal position where to place the image on the canvas. |
+| `dy` | ❌ | number | `0` | Destination Y: vertical position on the canvas. |
+| `dWidth`| ❌ | number | *sWidth* | Width to draw the image on the canvas. Can scale it. |
+| `dHeight` | ❌ | number | *sHeight* | Height to draw the image on the canvas. |
 ```mdx-code-block
 </APITable>
 ```
@@ -264,13 +264,13 @@ This method wraps the canvas rectangle drawing functionality with simplified par
     y: 0,            // Default 0
     width: 100,      // Default 'this.canvas.width'
     height: 100,     // Default 'this.canvas.height'
-    color: "black",  // (Optional) Default 'black'
-    opacity: 1,      // (Optional) Default 1
-    cornerRadius: 0, // (Optional) Default 0 // 5 || [5] | [5, 5] | [5, 10, 5, 10]
+    color: "black",  // Default 'black'
+    opacity: 1,      // Default 1
+    cornerRadius: 0, // Default 0 // 5 || [5] | [5, 5] | [5, 10, 5, 10]
     stroke: {
-        style: "middle", // (Optional) Default 'middle' // 'inside' | 'outside' | 'middle'
-        width: 0,        // (Optional) Default 0
-        color: "black",  // (Optional) Default 'black'
+        style: "middle", // Default 'middle' // 'inside' | 'outside' | 'middle'
+        width: 0,        // Default 0
+        color: "black",  // Default 'black'
     },
 })`}
 </CodeBlock>
@@ -287,18 +287,18 @@ drawRect(config)
 <APITable>
 ```
 
-| `config` Parameter      | Required | Type                       | Default              | Description |
-| :---------------------- | :------- | :-------------------------- | :------------------- | :---------- |
-| `x`                     | ❌       | number                     | `0`                  | X coordinate of the top-left corner of the rectangle. |
-| `y`                     | ❌       | number                     | `0`                  | Y coordinate of the top-left corner of the rectangle. |
-| `width`                 | ❌       | number                     | `canvas.width`       | Width of the rectangle in pixels. |
-| `height`                | ❌       | number                     | `canvas.height`      | Height of the rectangle in pixels. |
-| `color`                 | ❌       | CSS color                  | `'black'`            | Fill color of the rectangle. |
-| `opacity`| ❌     | number              | `1`         | Opacity of the drawn rectangle (`0` to `1`) |
-| `cornerRadius`          | ❌       | number \| array            | `0`                  | Border radius in pixels. Can be a single value (`5`), or array: `[5]`, `[5, 5]`, `[5, 10, 5, 10]`. |
-| `stroke.style`          | ❌       | string                     | `'middle'`           | Stroke alignment: `'inside'`, `'outside'`, or `'middle'`. |
-| `stroke.width`          | ❌       | number                     | `0`                  | Stroke width in pixels. |
-| `stroke.color`          | ❌       | CSS color                  | `'black'`            | Stroke color of the rectangle. |
+| `config` Parameter | Required | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `x`| ❌ | number | `0` | X coordinate of the top-left corner of the rectangle. |
+| `y`| ❌ | number | `0` | Y coordinate of the top-left corner of the rectangle. |
+| `width` | ❌ | number | `canvas.width` | Width of the rectangle in pixels. |
+| `height` | ❌ | number | `canvas.height`| Height of the rectangle in pixels. |
+| `color` | ❌ | CSS color | `'black'` | Fill color of the rectangle. |
+| `opacity`| ❌ | number | `1` | Opacity of the drawn rectangle (`0` to `1`) |
+| `cornerRadius` | ❌ | number \| array | `0` | Border radius in pixels. Can be a single value (`5`), or array: `[5]`, `[5, 5]`, `[5, 10, 5, 10]`. |
+| `stroke.style` | ❌ | string| `'middle'` | Stroke alignment: `'inside'`, `'outside'`, or `'middle'`. |
+| `stroke.width` | ❌ | number | `0` | Stroke width in pixels. |
+| `stroke.color` | ❌ | CSS color | `'black'` | Stroke color of the rectangle. |
 
 ```mdx-code-block
 </APITable>
@@ -317,16 +317,16 @@ This method simplifies `createLinearGradient()` by automatically calculating the
 
 <CodeBlock className="small-code" language="javascript" title='Usage'>
 {`this.drawGradient({
-    x: 10,       // (Optional) Default 0
-    y: 10,       // (Optional) Default 0
-    width: 90,   // (Optional) Default 100
-    height: 80,  // (Optional) Default 100
-    angle: 0,    // (Optional) Default 0 // (in deg, clockwise) 0 (upward) to 360
-    gradient: [  // (Optional) Default from '0% black' to '100% black'
+    x: 10,       // Default 0
+    y: 10,       // Default 0
+    width: 90,   // Default 100
+    height: 80,  // Default 100
+    angle: 0,    // Default 0 // (in deg, clockwise) 0 (upward) to 360
+    gradient: [  // Default from '0% black' to '100% black'
         [0.0, 'rgba(0,0,0, 0)'], // 0.0 - Start
         [1.0, 'rgba(0,0,0, 0.8)'], // 1.0 - End
     ],
-    opacity: 1,  // (Optional) Default 1
+    opacity: 1,  // Default 1
 })`}
 </CodeBlock>
 
@@ -342,15 +342,15 @@ drawGradient(config)
 <APITable>
 ```
 
-| `config` Parameters    | Required | Type             | Default                   | Description |
-| :------------ | :------- | :----------------| :-------------------------| :---------- |
-| `x`           | ❌       | number           | `0`                       | X coordinate of the top-left corner of the gradient area. |
-| `y`           | ❌       | number           | `0`                       | Y coordinate of the top-left corner of the gradient area. |
-| `width`       | ❌       | number           | `canvas.width`            | Width of the gradient rectangle. |
-| `height`      | ❌       | number           | `canvas.height`           | Height of the gradient rectangle. |
-| `angle`       | ❌       | number (degrees) | `0`                       | Direction of the gradient in degrees, clockwise. `0` is bottom to top, `90` is left to right, `180` is top to bottom, etc. |
-| `gradient`    | ❌       | array            | `[[0, 'black'], [1, 'black']]` | Array of gradient stops: each stop is a tuple `[offset, color]`, where offset is between `0.0` and `1.0`. |
-| `opacity`     | ❌       | number   | `1`        | Opacity of the drawn rectangle (`0` to `1`) |
+| `config` Parameters | Required | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `x` | ❌ | number | `0` | X coordinate of the top-left corner of the gradient area. |
+| `y` | ❌ | number | `0` | Y coordinate of the top-left corner of the gradient area. |
+| `width` | ❌ | number | `canvas.width` | Width of the gradient rectangle. |
+| `height`| ❌ | number | `canvas.height` | Height of the gradient rectangle. |
+| `angle` | ❌ | number (degrees) | `0` | Direction of the gradient in degrees, clockwise. `0` is bottom to top, `90` is left to right, `180` is top to bottom, etc. |
+| `gradient` | ❌ | array | `[[0, 'black'], [1, 'black']]` | Array of gradient stops: each stop is a tuple `[offset, color]`, where offset is between `0.0` and `1.0`. |
+| `opacity` | ❌ | number | `1` | Opacity of the drawn rectangle (`0` to `1`) |
 
 
 ```mdx-code-block
@@ -374,8 +374,8 @@ This method draws a star centered on (`x_center`, `y_center`) with alternating i
     spikes: 5,
     outerRadius: 100,
     innerRadius: 150,
-    color: "red",
-    opacity: 1, // (Optional) Default 1
+    color: "red", // Default 'red'
+    opacity: 1,   // Default 1
 })`}
 </CodeBlock>
 
@@ -391,13 +391,13 @@ drawStar(config)
 <APITable>
 ```
 
-| `config` Parameters | Required | Type     | Default   | Description |
-| :-------------- | :------- | :--------| :-------- | :---------- |
-| `x_center`  | ✅ | number | *`null`*| X coordinate of the star's center. |
-| `y_center`| ✅ | number | *`null`*| Y coordinate of the star's center. |
-| `spikes`| ✅ | number | *`null`*| Number of spikes (points) the star should have. |
-| `outerRadius` | ✅ | number | *`null`*| Radius of the outer tips of the star. |
-| `innerRadius` | ✅ | number | *`null`*| Radius of the inner dips between star points. |
+| `config` Parameters | Required | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `x_center` | ✅ | number | *`null`* | X coordinate of the star's center. |
+| `y_center`| ✅ | number | *`null`* | Y coordinate of the star's center. |
+| `spikes`| ✅ | number | *`null`* | Number of spikes (points) the star should have. |
+| `outerRadius` | ✅ | number | *`null`* | Radius of the outer tips of the star. |
+| `innerRadius` | ✅ | number | *`null`* | Radius of the inner dips between star points. |
 | `color` | ❌ | CSS color | `'red'` | Fill color of the star shape. |
 | `opacity` | ❌ | number | `1`| Opacity of the drawn star (`0` to `1`) |
 
@@ -429,7 +429,7 @@ applyFilter(filter)
 ```
 | # | Name | Required | Type | Default | Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | `filter` | ✅  | string | *`null`*  | CSS-like filter string to apply to the canvas (e.g. `'blur(5px) brightness(150%)'`). |
+| 1 | `filter` | ✅ | string | *`null`* | CSS-like filter string to apply to the canvas (e.g. `'blur(5px) brightness(150%)'`). |
 ```mdx-code-block
 </APITable>
 ```
@@ -460,7 +460,7 @@ prepareFilter(filter)
 ```
 | # | Name | Required | Type | Default | Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | `filter` | ✅  | string | *`null`*  | CSS-like filter string to apply to the canvas (e.g. `'blur(5px) brightness(150%)'`). |
+| 1 | `filter` | ✅ | string | *`null`* | CSS-like filter string to apply to the canvas (e.g. `'blur(5px) brightness(150%)'`). |
 ```mdx-code-block
 </APITable>
 ```
@@ -492,8 +492,8 @@ blur(radius, keepEdges = true)
 ```
 | # | Name | Required | Type | Default | Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | `radius` | ✅  | number or string | *`null`*  | The radius of the blur effect in pixels. Either a number (e.g., `5`) or a string with pixel units (e.g., `'5px'`). |
-| 2 | `keepEdges` | ❌  | boolean | `true`  | Whether to keep the edges of the canvas when applying the blur. |
+| 1 | `radius` | ✅ | number or string | *`null`* | The radius of the blur effect in pixels. Either a number (e.g., `5`) or a string with pixel units (e.g., `'5px'`). |
+| 2 | `keepEdges` | ❌ | boolean | `true` | Whether to keep the edges of the canvas when applying the blur. |
 ```mdx-code-block
 </APITable>
 ```
@@ -527,7 +527,7 @@ this.applyLUT(lut)
 ```
 | # | Name | Required | Type | Default | Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | `lut`          | ✅       | Raffaello_LUT                                  | *`null`*  | The LUT instance to apply to the canvas. |
+| 1 | `lut` | ✅ | Raffaello_LUT | *`null`* | The LUT instance to apply to the canvas. |
 ```mdx-code-block
 </APITable>
 ```
@@ -574,7 +574,7 @@ this.move(x, y);
 
 | # | Name | Type | Default | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| 1 | `x` | number | `0`| Amount to shift the canvas content horizontally (positive values shift right, negative values shift left). |
+| 1 | `x` | number | `0` | Amount to shift the canvas content horizontally (positive values shift right, negative values shift left). |
 | 2 | `y` | number | `0` | Amount to shift the canvas content vertically (positive values shift down, negative values shift up). |
 
 **Returns:** 
@@ -600,10 +600,82 @@ this.rotate(angle, x, y);
 
 | # | Name | Type | Default | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| 1 | `angle` | number | `0`| Angle to rotate in degrees. |
-| 2 | `x` | number | `canvas.width / 2`| Coordinate X of the pivot point. |
-| 3 | `y` | number | `canvas.height / 2` | Coordinate Y of the pivot point. |
+| 1 | `angle` | number | `0` | Angle to rotate in degrees. |
+| 2 | `x` | number | `this.width / 2` | Coordinate X of the pivot point. |
+| 3 | `y` | number | `this.height / 2` | Coordinate Y of the pivot point. |
 
 **Returns:** 
 
 `void` — This method performs a side effect (draw on the canvas). It does not return any value.
+
+
+---
+
+### bindToLayer()
+
+Bind the current layer to a specific layer in the parent canvas. This can be used to create dependencies between layers, so that one layer will only be drawn after another layer has been drawn.
+
+<CodeBlock className="small-code" language="javascript" title='Usage'>
+{`this.bindToLayer(2); // Bind current layer to layer 2`}
+</CodeBlock>
+
+**Parameters:**
+
+```javascript
+this.bindToLayer(layerIdx);
+```
+
+| # | Name | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | `layerIdx` | number | `0` | The index of the layer to bind to. |
+
+**Returns:** 
+
+`void` — This method performs a side effect (draw on the canvas). It does not return any value.
+
+
+---
+
+### getLuminance()
+
+Get the average luminance of a specific zone on the canvas. This can be used to analyze the brightness of different areas of the canvas, which can inform dynamic adjustments to the drawing.
+
+<CodeBlock className="small-code" language="javascript" title='Usage'>
+{`// Get average luminance of a 100x100 zone starting at (10, 10)
+this.getLuminance({ 
+    x1: 10, 
+    y1: 10, 
+    x2: 110, 
+    y2: 110
+});
+this.getLuminance({ 
+    x: 10, 
+    y: 10, 
+    width: 100, 
+    height: 100
+});
+this.getLuminance({ 
+    bounds: { minX: 10, minY: 10, maxX: 110, maxY: 110 } 
+});
+`}
+</CodeBlock>
+
+**Parameters:**
+
+```javascript
+this.getLuminance(config);
+```
+
+| `config` Parameters | Required | Type | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `x1` or `x` | ✅ | number | `0` | X coordinate of the top-left corner of the zone. |
+| `y1` or `y` | ✅ | number | `0` | Y coordinate of the top-left corner of the zone. |
+| `x2` or `width`| ✅ | number | `this.width` | X coordinate of the bottom-right corner of the zone. Or width of the zone. |
+| `y2` or `height` | ✅ | number | `this.height` | Y coordinate of the bottom-right corner of the zone. Or height of the zone. |
+| `bounds` | ❌ | object | *calculated from config* | Alternative way to specify the zone using `bounds` object with `minX`, `minY`, `maxX`, `maxY` properties. In which case, the other parameters are ignored. |
+| `normalize` | ❌ | boolean | `false` | Whether to normalize the luminance value to the range [0, 1]. |
+| `sampleStep` | ❌ | number | `1` | Step in pixels for sampling the zone (e.g. `2` means sample every 2 pixels). Higher values can improve performance at the cost of accuracy. |
+
+**Returns:** 
+
+`number` — The average luminance of the specified zone, as a value between `0` (black) and `255` (white).

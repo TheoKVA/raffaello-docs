@@ -7,6 +7,8 @@ import APITable from '@site/src/components/APITable';
 new Raffaello_Zip()
 ```
 
+This is the class to create a zip file. It allows you to add files to the zip and then trigger the download of the zip file. It uses the `@zip.js/zip.js` library under the hood, but with a simpler and more intuitive API for RAFFAELLO users.
+
 ## Usage
 
 <CodeBlock className="small-code" language="javascript" title=''>
