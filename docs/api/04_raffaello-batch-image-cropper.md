@@ -42,3 +42,20 @@ This is the class to create multiple image inputs, based on Cropper.
     }
 }`}
 </CodeBlock>
+
+## Constructor Options
+
+```mdx-code-block
+<APITable>
+```
+| Name | Required | Type | Default | Description | 
+| :--- | :--- | :--- | :--- | :--- |
+| `reference` | ✅ | object | `null` | The reference to the parent class that will use the batch image cropper. This is necessary to access the canvas and other properties of the parent class. |
+| `imageConfigs` | ✅ | array of objects | `[]` | An array of configuration objects for each image input. These should follow the structure needed for each image cropper. |
+```mdx-code-block
+</APITable>
+```
+
+## Initiated Properties
+
+The resulting is an array of image input instances created based on the `imageConfigs` provided in the constructor. Each instance contains properties such as `img` (the cropped image as a Blob), `config` (the configuration object for that image), and `cropper` (the Cropper instance for that image).

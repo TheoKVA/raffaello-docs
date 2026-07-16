@@ -60,7 +60,7 @@ new class {
         // LAYER X // DRAW IMAGE
         this.canvas.addLayer().draw(function() {
             // highlight-start
-            this.drawImage(myImageAtRoot.img);
+            this.drawImage(myImageAtRoot);
             // highlight-end
         });
         
@@ -96,5 +96,3 @@ new class {
 ```mdx-code-block
 </APITable>
 ```
-
----

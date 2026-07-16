@@ -142,12 +142,13 @@ Be mindful of the order in which layers are added on the canvas. Layers are rend
 **Parameters:**
 
 ```javascript
-.addLayer(type = 'normal')
+.addLayer(type = 'normal', effect = null)
 ```
 
 | # | Name | Required | Type | Default | Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1 | `type`  | ❌ | String | `'normal'` | The layer type, or the effect. `'normal'` \| `'alpha'` \| or a knowned CSS effect |
+| 2 | `effect`  | ❌ | String | *`null`* | An optional second effect to apply on the layer. |
 
 **Returns:** a new instance of a `Raffaello_CanvasLayer`
 
@@ -160,6 +161,18 @@ The `type` is a parameter that will define the compositing operation to apply wh
 | `'luminance'` | The current layer opacity is determined by the luminance of the following drawn layer. |
 | **String** | Any knowned [globalCompositeOperation properties](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation). Possible values are `'screen'`, `'overlay'`, `'darken'`, `'lighten'`, `'color-dodge'`, `'color-burn'`, `'hard-light'`, `'soft-light'`, `'difference'`, `'exclusion'`, `'hue'`, `'saturation'`, `'color'`, `'luminosity'`|
 
+
+:::note
+
+You can cumulate 'alpha' and any other effect by providing the two string separated. e.g.
+
+```javascript
+this.canvas.addLayer('alpha', 'multiply').draw(function() {
+    ...
+});
+```
+
+:::
 
 
 ---

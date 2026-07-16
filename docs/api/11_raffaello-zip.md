@@ -25,6 +25,9 @@ This is the class to create a zip file. It allows you to add files to the zip an
 `}
 </CodeBlock>
 
+## Constructor Options
+
+This class does not require any options to be instantiated. You can simply create a new instance using `new Raffaello_Zip()` without passing any parameters.
 
 ## Initiated Properties
 

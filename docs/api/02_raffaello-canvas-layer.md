@@ -166,7 +166,7 @@ Method to draw text content upon a `Raffaello_Canvas.addLayer()`.
 | `fontFillColor`| ❌ | CSS color | `white` | Fill color of the text. |
 | `textAlign.horizontal`| ❌ | string | `left` | Horizontal alignment: `'left'` \| `'center'` \| `'right'`. |
 | `textAlign.vertical` | ❌ | string | `bottom` | Vertical alignment: `'top'` \| `'center'` \| `'bottom'`. |
-| `textBaseline` | ❌ | string | `alphabetic` | Canvas text baseline alignment (e.g. `'alphabetic'`). |
+| `textBaseline` | ❌ | string | `alphabetic` | Canvas text baseline alignment (e.g. `'alphabetic'`, [see reference](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textBaseline)). |
 | `anchorPoint` | ❌ | string | `true` | Anchor reference: `'none'` \| `'true'` \| `'L'`. |
 | `position` | ✅ | object | *`{}`* | Object defining position and layout constraints. |
 | `position.x` | ✅ | number | *`null`* | X coordinate of the text position. |

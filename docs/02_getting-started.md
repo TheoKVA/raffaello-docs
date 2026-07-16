@@ -39,7 +39,7 @@ To use RAFFAELLO, you need to acquire a license key. You can get one by contacti
 
 ## Dependencies
 
-- [cropper.js (1.x)](https://github.com/fengyuanchen/cropperjs/) ([API](https://fengyuanchen.github.io/cropperjs/v1/)), a custom library by **Fengyuan Chen**. This library builds the UI to allow the user to crop the input images.
+- [cropper.js (1.x)](https://github.com/fengyuanchen/cropperjs/) ([API](https://github.com/fengyuanchen/cropperjs/blob/v1/README.md)), a custom library by **Fengyuan Chen**. This library builds the UI to allow the user to crop the input images.
 - [mediabunny](https://github.com/Vanilagy/mediabunny), a library by **Vanilagy**. This library is used to read / encode mp4 videos, to allow using video as inputs in RAFFAELLO.
 - [zip.js](https://github.com/gildas-lormeau/zip.js). This library is used to create and manipulate zip files.
 

@@ -59,7 +59,7 @@ this.inputImage = new Raffaello_ImageCropper({
     width: 1000,       // (Optional) Default this.canvas.width
     height: 1000,      // (Optional) Default this.canvas.height
     watermark: '...'   // (Optional) Watermark url or base 64
-    viewMode: 0,       // (Optional) Default 0
+    viewMode: 2,       // (Optional) Default 2
     zoomOnWheel: 1,    // (Optional) Default 1
     acceptVideo: true, // (Optional) Default false
 
@@ -86,7 +86,7 @@ this.inputImage = new Raffaello_ImageCropper({
 | `width` | ✅ | number | *`this.canvas.width`* | The width of the cropper canvas. By default, it takes the width of the main canvas. |
 | `height` | ✅ | number | *`this.canvas.height`* | The height of the cropper canvas. By default, it takes the height of the main canvas. |
 | `watermark` | ❌ | string (URL or base64) | *`null`* | An optional watermark image that will be displayed on top of the cropper. It can be a URL or a base64 string. |
-| `viewMode` | ❌ | number | `0` | ... |
+| `viewMode` | ❌ | number | `2` | The view mode for the cropper, based on the [Cropper API](https://github.com/fengyuanchen/cropperjs/blob/v1/README.md) |
 | `zoomOnWheel` | ❌ | boolean | `1` | Whether to enable zooming the cropper with the mouse wheel. |
 | `acceptVideo` | ❌ | boolean | `false` | Whether to accept video files as input. If set to `true`, users will be able to upload videos, and the cropper will extract the first frame as the image to be cropped. |
 ```mdx-code-block
